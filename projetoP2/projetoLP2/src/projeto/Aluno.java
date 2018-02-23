@@ -31,16 +31,8 @@ public class Aluno {
 		return matricula;
 	}
 
-	public void setMatricula(String matricula) {
-		this.matricula = matricula;
-	}
-
 	public int getCodigoCurso() {
 		return codigoCurso;
-	}
-
-	public void setCodigoCurso(int codigoCurso) {
-		this.codigoCurso = codigoCurso;
 	}
 
 	public String getTelefone() {
