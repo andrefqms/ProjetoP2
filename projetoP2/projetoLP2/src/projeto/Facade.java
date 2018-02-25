@@ -30,4 +30,14 @@ public class Facade {
 	public String listarAlunos() {
 		return this.sistema.controllerAluno.listarAlunos();
 	}
+	public void tornarTutor(String matricula, String disciplina, int proficiencia){
+		this.sistema.controllerAluno.tornarTutor( matricula, disciplina, proficiencia);
+	}
+	public String recuperaTutor(String matricula){
+		return this.sistema.controllerAluno.recuperaTutor(matricula);
+	}
+	public String listarTutores(){
+		return this.sistema.controllerAluno.listarTutores();
+	}
+
 }
