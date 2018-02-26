@@ -74,50 +74,13 @@ public class ControllerAluno {
 		} 
 		return null;
 	}
-	public Tutor ProcurarTutor(String matricula) {
-		for (Tutor tutor : tutores) {
-			if (tutor.getMatricula().equals(matricula)) {
-				return tutor;
+	public Aluno ProcurarAlunoEmail(String email) {
+		for (int i = 0; i < alunos.size(); i++) {
+			if (alunos.get(i).getEmail().equals(email)) {
+				return alunos.get(i);
 			}
-		}
+		} 
 		return null;
 	}
-	public void tornarTutor(String matricula, String disciplina, int proficiencia)  {
-		if(proficiencia <= 0){
-			throw new IllegalArgumentException("Erro na definicao de papel: Proficiencia invalida");
-		}
 	
-		Tutor tutor = new Tutor(ProcurarAluno(matricula).getNome(), ProcurarAluno(matricula).getMatricula(),
-				ProcurarAluno(matricula).getCodigoCurso(), ProcurarAluno(matricula).getTelefone(),
-				ProcurarAluno(matricula).getEmail(), disciplina, proficiencia);
-		tutores.add(tutor);
-		
-		
-	}
-
-	public String recuperaTutor(String matricula) throws IllegalArgumentException{
-		String msg = "";			
-		if(ProcurarTutor(matricula) == null){
-			throw new IllegalArgumentException("Erro na busca por tutor: Tutor nao encontrado");
-		}
-		for (Tutor tutor : tutores) {
-			if (tutor.getMatricula().equals(matricula)) {
-				msg += tutor.toString();
-			}
-		}
-		
-		return msg;
-	}
-
-	public String listarTutores() {
-		String msg = "";
-		for (Tutor tutor : tutores) {
-			msg += tutor.toString() + ", ";
-
-		}
-		String retorno = msg.substring(0, msg.length() - 2);
-
-		return retorno;
-	}
-
 }
