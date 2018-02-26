@@ -3,9 +3,11 @@ package projeto;
 public class Sistema {
 
 	ControllerAluno controllerAluno;
+	ControllerTutor controllerTutor;
 
 	public Sistema() {
-		controllerAluno = new ControllerAluno();
+		this.controllerAluno = new ControllerAluno();
+		this.controllerTutor = new ControllerTutor();
 	}
 
 	public void cadastrarAluno(String nome, String matricula, int codigoCurso, String telefone, String email) {
@@ -24,16 +26,28 @@ public class Sistema {
 		return controllerAluno.getInfoAluno(matricula, atributo);
 	}
 
-	public void tornarTutor(String matricula, String disciplina, int proficiencia)throws IllegalArgumentException {
-		controllerAluno.tornarTutor(matricula, disciplina, proficiencia);
+	public void tornarTutor(String matricula, String disciplina, int proficiencia) throws IllegalArgumentException {
+		controllerTutor.tornarTutor(controllerAluno,matricula, disciplina, proficiencia);
 	}
 
-	public String recuperaTutor(String matricula)throws IllegalArgumentException {
-		return controllerAluno.recuperaTutor(matricula);
+	public String recuperaTutor(String matricula) throws IllegalArgumentException {
+		return controllerTutor.recuperaTutor(matricula);
 	}
 
 	public String listarTutores() {
-		return controllerAluno.listarTutores();
+		return controllerTutor.listarTutores();
+	}
+	public void cadastrarHorario(String email, String horario, String dia){
+		controllerTutor.cadastrarHorario(controllerTutor, email, horario, dia);
+	}
+	public void cadastrarLocalDeAtendimento(String email, String local){
+		controllerTutor.cadastrarLocalDeAtendimento(controllerTutor, email, local);
+	}
+	public boolean consultaHorario(String email, String horario, String dia){
+		
+	}
+	public boolean consultaLocal(String email, String local){
+		
 	}
 
 }
