@@ -1,7 +1,9 @@
 package projeto;
 
 public class Aluno {
-
+	/**
+	 * Atributos
+	 */
 	private String nome;
 	private String matricula;
 	private int codigoCurso;
@@ -22,31 +24,45 @@ public class Aluno {
 		this.email = email;
 		this.codigoCurso = codigoCurso;
 	}
-
+	/**
+	 * metodo acessor de nome
+	 */
 	public String getNome() {
 		return nome;
 	}
-
+	/**
+	 * metodo de acessar matricula
+	 */
 	public String getMatricula() {
 		return matricula;
 	}
-
+	/**
+	 * metodo que retorna a string que é o codigo do curso
+	 */
 	public int getCodigoCurso() {
 		return codigoCurso;
 	}
-
+	/**
+	 * metodo acessor do telefone
+	 */
 	public String getTelefone() {
 		return telefone;
 	}
-
+	/**
+	 * metodo modificador do telefona
+	 */
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-
+	/**
+	 * metodo acessroe que retorna a string email
+	 */
 	public String getEmail() {
 		return email;
 	}
-
+	/**
+	 * metodo modificador do email
+	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
@@ -75,7 +91,9 @@ public class Aluno {
 			return false;
 		return true;
 	}
-
+	/**
+	 * metodo que retorna a representacao textual da classe
+	 */
 	@Override
 	public String toString() {
 		String retorno = "";

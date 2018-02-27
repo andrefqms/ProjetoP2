@@ -9,7 +9,9 @@ public class ControllerTutor {
 	public ControllerTutor() {
 		this.tutores = new HashSet<>();
 	}
-
+	/**
+	 * Metodo que procura certo tutor e retorna ele
+	 */
 	public Tutor ProcurarTutor(String matricula) {
 		for (Tutor tutor : tutores) {
 			if (tutor.getMatricula().equals(matricula)) {
@@ -18,7 +20,9 @@ public class ControllerTutor {
 		}
 		return null;
 	}
-
+	/**
+	 * metodo que torna um aluno em tutor
+	 */
 	public void tornarTutor(ControllerAluno controllerAluno, String matricula, String disciplina, int proficiencia) {
 		if (proficiencia <= 0) {
 			throw new IllegalArgumentException("Erro na definicao de papel: Proficiencia invalida");
@@ -43,7 +47,9 @@ public class ControllerTutor {
 		tutores.add(tutor);
 
 	}
-
+	/**
+	 * metodo que retorna o tostring de um certo tutor
+	 */
 	public String recuperaTutor(String matricula) throws IllegalArgumentException {
 		String msg = "";
 		if (ProcurarTutor(matricula) == null) {
@@ -57,7 +63,9 @@ public class ControllerTutor {
 
 		return msg;
 	}
-
+	/**
+	 * metodo que retorna a lista de co mo tostring de cada tutor
+	 */
 	public String listarTutores() {
 		String msg = "";
 		for (Tutor tutor : tutores) {
@@ -68,8 +76,34 @@ public class ControllerTutor {
 
 		return retorno;
 	}
+	/**
+	 * metodo que retorna um certo tutor de acordo com o email
+	 */
+	public Tutor ProcurarTutorEmail(String email) {
+		for (Tutor tutor : tutores) {
+			if (tutor.getEmail().equals(email)) {
+				return tutor;
+			}
+		}
+		return null;
+	}
+	/**
+	 * Metodo que cadastra o horario de atendimento
+	 */
+	public void cadastrarHorario(ControllerTutor controllerTutor, String email, String horario, String dia) throws IllegalArgumentException{
+		if(dia.trim().equals("") || dia == null){
+			throw new IllegalArgumentException("Erro no cadastrar horario: dia nao pode ser vazio ou em branco");
+		}
+		if(horario.trim().equals("") || horario == null){
+			throw new IllegalArgumentException("Erro no cadastrar horario: horario nao pode ser vazio ou em branco");
+		}
+		if(email.trim().equals("") || email == null){
+			throw new IllegalArgumentException("Erro no cadastrar horario: email nao pode ser vazio ou em branco");
+		}
+		if(ProcurarTutorEmail(email) == null){
+			throw new IllegalArgumentException("Erro no cadastrar horario: tutor nao cadastrado");
+		}
 
-	public void cadastrarHorario(ControllerTutor controllerTutor, String email, String horario, String dia) {
 		for (Tutor tutor : tutores) {
 			if (tutor.getEmail().equalsIgnoreCase(email)) {
 				tutor.getDias().add(dia);
@@ -77,15 +111,28 @@ public class ControllerTutor {
 			}
 		}
 	}
-
-	public void cadastrarLocalDeAtendimento(ControllerTutor controllerTutor, String email, String local) {
+	/**
+	 * metodo que cadastra o local de atendimento
+	 */
+	public void cadastrarLocalDeAtendimento(ControllerTutor controllerTutor,String email, String local) throws IllegalArgumentException{
+		if(local.trim().equals("") || local == null){
+			throw new IllegalArgumentException("Erro no cadastrar local de atendimento: local nao pode ser vazio ou em branco");
+		}
+		if(email.trim().equals("") || email == null){
+			throw new IllegalArgumentException("Erro no cadastrar local de atendimento: email nao pode ser vazio ou em branco");
+		}
+		if(ProcurarTutorEmail(email) == null){
+			throw new IllegalArgumentException("Erro no cadastrar local de atendimento: tutor nao cadastrado");
+		}
 		for (Tutor tutor : tutores) {
 			if (tutor.getEmail().equalsIgnoreCase(email)) {
 				tutor.setLocal(local);
 			}
 		}
 	}
-
+	/**
+	 * metodo que retorna true se possui certo horario de atendimento e false se nao
+	 */
 	public boolean consultaHorario(String email, String horario, String dia) {
 		for (Tutor tutor : tutores) {
 			if (tutor.getEmail().equalsIgnoreCase(email)) {
@@ -98,7 +145,9 @@ public class ControllerTutor {
 		}
 		return false;
 	}
-
+	/**
+	 * metodo que retorna true se possui certo local de atendimento e false se nao
+	 */
 	public boolean consultaLocal(String email, String local) {
 		for (Tutor tutor : tutores) {
 			if (tutor.getEmail().equalsIgnoreCase(email) && tutor.getLocal().equalsIgnoreCase(local)) {

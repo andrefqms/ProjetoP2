@@ -14,40 +14,62 @@ public class Facade {
 	public Facade() {
 		this.sistema = new Sistema();
 	}
-	
+	/**
+	 * Delegacao do metodo cadastrarAluno
+	 */
 	public void cadastrarAluno(String nome, String matricula, int codigoCurso, String telefone, String email) {
 		this.sistema.controllerAluno.cadastrarAluno(nome, matricula, codigoCurso, telefone, email);
 	}
-	
+	/**
+	 * Delegacao do metodo recuperaAluno
+	 */
 	public String recuperaAluno(String matricula) {
 		return this.sistema.controllerAluno.recuperaAluno(matricula);
 	}
-	
+	/**
+	 * Delegacao do metodo getInfoAluno
+	 */
 	public String getInfoAluno(String matricula, String atributo) {
 		return this.sistema.controllerAluno.getInfoAluno(matricula, atributo);
 	}
-	
+	/**
+	 * Delegacao do metodo listarAlunos
+	 */
 	public String listarAlunos() {
 		return this.sistema.controllerAluno.listarAlunos();
-	}
+	}/**
+	 * Delegacao do metodo tornarTutor
+	 */
 	public void tornarTutor(String matricula, String disciplina, int proficiencia){
 		this.sistema.controllerTutor.tornarTutor(sistema.controllerAluno, matricula, disciplina, proficiencia);
-	}
+	}/**
+	 * Delegacao do metodo recuperaTutor
+	 */
 	public String recuperaTutor(String matricula){
 		return this.sistema.controllerTutor.recuperaTutor(matricula);
-	}
+	}/**
+	 * Delegacao do metodo listarTutores
+	 */
 	public String listarTutores(){
 		return this.sistema.controllerTutor.listarTutores();
-	}
+	}/**
+	 * Delegacao do metodo cadastrarHorario
+	 */
 	public void cadastrarHorario(String email, String horario, String dia){
 		this.sistema.controllerTutor.cadastrarHorario(sistema.controllerTutor, email, horario, dia);
-	}
+	}/**
+	 * Delegacao do metodo cadastrarLocalDeAtendimento
+	 */
 	public void cadastrarLocalDeAtendimento(String email, String local){
 		this.sistema.controllerTutor.cadastrarLocalDeAtendimento(sistema.controllerTutor, email, local);
-	}
+	}/**
+	 * Delegacao do metodo consultaHorario
+	 */
 	public boolean consultaHorario(String email, String horario, String dia){
 		return this.sistema.controllerTutor.consultaHorario(email, horario, dia);
-	}
+	}/**
+	 * Delegacao do metodo consultaLocal
+	 */
 	public boolean consultaLocal(String email, String local){
 		return this.sistema.controllerTutor.consultaLocal(email, local);
 	}

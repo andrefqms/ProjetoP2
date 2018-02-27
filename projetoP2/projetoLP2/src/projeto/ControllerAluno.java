@@ -11,7 +11,9 @@ public class ControllerAluno {
 		this.alunos = new ArrayList<Aluno>();
 
 	}
-
+	/**
+	 * metodo que cadastra o aluno
+	 */
 	public void cadastrarAluno(String nome, String matricula, int codigoCurso, String telefone, String email) {
 		Aluno aluno = new Aluno(nome, matricula, codigoCurso, telefone, email);
 		if (this.alunos.contains(aluno)) {
@@ -19,7 +21,9 @@ public class ControllerAluno {
 		}
 		this.alunos.add(aluno);
 	}
-
+	/**
+	 * metodo que retorna o tostring de certo aluno
+	 */
 	public String recuperaAluno(String matricula) {
 		String retorno = "";
 		for (int i = 0; i < this.alunos.size(); i++) {
@@ -32,7 +36,9 @@ public class ControllerAluno {
 		}
 		return retorno;
 	}
-
+	/**
+	 * metodo que retorna as informacoes de certo aluno
+	 */
 	public String getInfoAluno(String matricula, String atributo) {
 		String retorno = "";
 
@@ -50,7 +56,9 @@ public class ControllerAluno {
 		}
 		return retorno;
 	}
-
+	/**
+	 * metodo que retona o tostring de cada aluno existente
+	 */
 	public String listarAlunos() {
 		String lista = "";
 		Collections.sort(alunos, new AlunoComparator());
@@ -61,7 +69,9 @@ public class ControllerAluno {
 
 		return retorno;
 	}
-
+	/**
+	 * metodo que procura certo aluno de acordo com a matricula
+	 */
 	public Aluno ProcurarAluno(String matricula) {
 		for (int i = 0; i < alunos.size(); i++) {
 			if (alunos.get(i).getMatricula().equals(matricula)) {
@@ -70,7 +80,9 @@ public class ControllerAluno {
 		}
 		return null;
 	}
-
+	/**
+	 * metodo que procura certo aluno de acordo com o email
+	 */
 	public Aluno ProcurarAlunoEmail(String email) {
 		for (int i = 0; i < alunos.size(); i++) {
 			if (alunos.get(i).getEmail().equals(email)) {
