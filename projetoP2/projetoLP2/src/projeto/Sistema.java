@@ -27,7 +27,7 @@ public class Sistema {
 	}
 
 	public void tornarTutor(String matricula, String disciplina, int proficiencia) throws IllegalArgumentException {
-		controllerTutor.tornarTutor(controllerAluno,matricula, disciplina, proficiencia);
+		controllerTutor.tornarTutor(controllerAluno, matricula, disciplina, proficiencia);
 	}
 
 	public String recuperaTutor(String matricula) throws IllegalArgumentException {
@@ -37,17 +37,21 @@ public class Sistema {
 	public String listarTutores() {
 		return controllerTutor.listarTutores();
 	}
-	public void cadastrarHorario(String email, String horario, String dia){
+
+	public void cadastrarHorario(String email, String horario, String dia) {
 		controllerTutor.cadastrarHorario(controllerTutor, email, horario, dia);
 	}
-	public void cadastrarLocalDeAtendimento(String email, String local){
+
+	public void cadastrarLocalDeAtendimento(String email, String local) {
 		controllerTutor.cadastrarLocalDeAtendimento(controllerTutor, email, local);
 	}
-	public boolean consultaHorario(String email, String horario, String dia){
+
+	public boolean consultaHorario(String email, String horario, String dia) {
 		return controllerTutor.consultaHorario(email, horario, dia);
 	}
-	public boolean consultaLocal(String email, String local){
-		
+
+	public boolean consultaLocal(String email, String local) {
+		return controllerTutor.consultaLocal(email, local);
 	}
 
 }

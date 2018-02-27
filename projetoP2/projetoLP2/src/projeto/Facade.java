@@ -49,7 +49,7 @@ public class Facade {
 		return this.sistema.controllerTutor.consultaHorario(email, horario, dia);
 	}
 	public boolean consultaLocal(String email, String local){
-		
+		return this.sistema.controllerTutor.consultaLocal(email, local);
 	}
 
 }
