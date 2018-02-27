@@ -44,7 +44,7 @@ public class Sistema {
 		controllerTutor.cadastrarLocalDeAtendimento(controllerTutor, email, local);
 	}
 	public boolean consultaHorario(String email, String horario, String dia){
-		
+		return controllerTutor.consultaHorario(email, horario, dia);
 	}
 	public boolean consultaLocal(String email, String local){
 		

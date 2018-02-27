@@ -46,7 +46,7 @@ public class Facade {
 		this.sistema.controllerTutor.cadastrarLocalDeAtendimento(sistema.controllerTutor, email, local);
 	}
 	public boolean consultaHorario(String email, String horario, String dia){
-		
+		return this.sistema.controllerTutor.consultaHorario(email, horario, dia);
 	}
 	public boolean consultaLocal(String email, String local){
 		

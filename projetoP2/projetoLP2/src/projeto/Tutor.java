@@ -1,24 +1,29 @@
 package projeto;
 
+import java.util.ArrayList;
+
 public class Tutor extends Aluno{
 
-	private String disciplina,dia,horario,local;
+	private ArrayList<String> horarios;
+	private ArrayList<String> dias;
+	private String local;
 	private int proficiencia,avaliacao,dinheiro;
-	
-	public Tutor(String nome, String matricula, int codigoCurso, String telefone, String email, String disciplina,int proficiencia) {
+	private ArrayList<String> disciplinas;
+		
+	public Tutor(String nome, String matricula, int codigoCurso, String telefone, String email, int proficiencia) {
 		super(nome, matricula, codigoCurso, telefone, email);
 		
-		this.disciplina = disciplina;
+		this.disciplinas = new ArrayList<String>();
 		this.proficiencia = proficiencia;
 		this.avaliacao = 4;
 		this.dinheiro = 0;
-		this.dia = "";
-		this.horario = "";
+		this.dias = new ArrayList<String>();
+		this.horarios = new ArrayList<String>();
 		this.local = "";
 	}
 
-	public String getDisciplina() {
-		return disciplina;
+	public ArrayList<String> getDisciplinas() {
+		return disciplinas;
 	}
 
 	public int getProficiencia() {
@@ -33,28 +38,28 @@ public class Tutor extends Aluno{
 		return dinheiro;
 	}
 	
-	public String getDia() {
-		return dia;
+	public ArrayList<String> getHorarios() {
+		return horarios;
 	}
 
-	public String getHorario() {
-		return horario;
+	public void setHorarios(ArrayList<String> horarios) {
+		this.horarios = horarios;
 	}
 
-	public void setLocal(String local) {
-		this.local = local;
+	public ArrayList<String> getDias() {
+		return dias;
+	}
+
+	public void setDias(ArrayList<String> dias) {
+		this.dias = dias;
 	}
 
 	public String getLocal() {
 		return local;
 	}
 
-	public void setDia(String dia) {
-		this.dia = dia;
-	}
-
-	public void setHorario(String horario) {
-		this.horario = horario;
+	public void setLocal(String local) {
+		this.local = local;
 	}
 
 	@Override
