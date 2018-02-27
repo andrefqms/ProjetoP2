@@ -2,17 +2,13 @@ package projeto;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
-
 
 public class ControllerAluno {
 
 	private ArrayList<Aluno> alunos;
-	private HashSet<Tutor> tutores;
 
 	public ControllerAluno() {
 		this.alunos = new ArrayList<Aluno>();
-		this.tutores = new HashSet<Tutor>();
 
 	}
 
@@ -71,16 +67,17 @@ public class ControllerAluno {
 			if (alunos.get(i).getMatricula().equals(matricula)) {
 				return alunos.get(i);
 			}
-		} 
+		}
 		return null;
 	}
+
 	public Aluno ProcurarAlunoEmail(String email) {
 		for (int i = 0; i < alunos.size(); i++) {
 			if (alunos.get(i).getEmail().equals(email)) {
 				return alunos.get(i);
 			}
-		} 
+		}
 		return null;
 	}
-	
+
 }
