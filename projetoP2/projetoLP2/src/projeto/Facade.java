@@ -73,5 +73,16 @@ public class Facade {
 	public boolean consultaLocal(String email, String local){
 		return this.sistema.controllerTutor.consultaLocal(email, local);
 	}
-
+	public int pedirAjudaPresencial (String disciplina, String horario, String dia, String localInteresse){
+		return this.sistema.pedirAjudaPresencial(disciplina, horario, dia, localInteresse);
+	}
+	public int pedirAjudaOnline (String disciplina){
+		return this.sistema.pedirAjudaOnline(disciplina);
+	}
+	public String pegarTutor(int idAjuda){
+		return this.sistema.pegarTutor(idAjuda);
+	}
+	public String getInfoAjuda(int idAjuda, String atributo){
+		return this.sistema.getInfoAjuda(idAjuda, atributo);
+	}
 }
