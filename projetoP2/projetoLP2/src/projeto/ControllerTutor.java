@@ -1,6 +1,8 @@
 package projeto;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 
 public class ControllerTutor {
 
@@ -19,6 +21,18 @@ public class ControllerTutor {
 			}
 		}
 		return null;
+	}
+	/**
+	 * Metodo que procura certo tutor que tem tal disciplina e retorna ele
+	 */
+	public ArrayList<Tutor> ProcurarTutorDisciplina(String disciplina) {
+		ArrayList<Tutor> lista = new ArrayList<>();
+		for (Tutor tutor : tutores) {
+			if (tutor.getDisciplinas().contains(disciplina)) {
+				lista.add(tutor);
+			}
+		}
+		return lista;
 	}
 	/**
 	 * metodo que torna um aluno em tutor
@@ -157,5 +171,34 @@ public class ControllerTutor {
 		return false;
 
 	}
-
+	/**
+	 * metodo acessor do arraylist com os tutores
+	 * @return os tutores
+	 */
+	public HashSet<Tutor> getTutores() {
+		return tutores;
+	}
+	/**
+	 * metodo que ao receber uma lista com tutores , procura o que tem melhor proficiencia e
+	 * e retorna esse tal tutor
+	 */
+	public Tutor ProcurarTutorProficiencia(ArrayList<Tutor> lista){
+		Tutor tutor= null;
+		for (int i = 0; i < lista.size(); i++) {
+			tutor = lista.get(i);
+			if(lista.get(i).getProficiencia() == lista.get(i+1).getProficiencia()){
+				tutor = lista.get(i);
+			}
+			if(lista.get(i).getProficiencia() < lista.get(i+1).getProficiencia()){
+					tutor = lista.get(i+1);
+			}
+			else{
+					tutor = lista.get(i);
+			}
+			
+		}		
+			
+		return tutor;
+	}
+	
 }

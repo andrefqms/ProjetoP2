@@ -1,14 +1,41 @@
 package projeto;
 
+import java.util.ArrayList;
+
 public class Sistema {
 
 	ControllerAluno controllerAluno;
 	ControllerTutor controllerTutor;
+	private ArrayList<Tutor> tutoresPedido;
+	private ArrayList<Tutor> pedidos;
 
 	public Sistema() {
 		this.controllerAluno = new ControllerAluno();
 		this.controllerTutor = new ControllerTutor();
+		this.tutoresPedido = new ArrayList<>();
+		this.pedidos = new ArrayList<>();
 	}
+	public int pedirAjudaPresencial (String disciplina, String horario, String dia, String localInteresse){
+		Tutor tutor = null;
+		tutor = controllerTutor.ProcurarTutorProficiencia(controllerTutor.ProcurarTutorDisciplina(disciplina));
+		if(controllerTutor.consultaHorario(tutor.getEmail(), horario, dia) && controllerTutor.consultaLocal(tutor.getEmail(), localInteresse)){
+			tutoresPedido.add(tutor);
+		}
+		return tutoresPedido.size();
+	}
+	public int pedirAjudaOnline (String disciplina){
+		Tutor tutor = null;
+		tutor = controllerTutor.ProcurarTutorProficiencia(controllerTutor.ProcurarTutorDisciplina(disciplina));
+		tutoresPedido.add(tutor);
+		return tutoresPedido.size();
+	}
+	public String pegarTutor(int idAjuda){
+		return tutoresPedido.get(idAjuda-1).toString();
+	}
+	public String getInfoAjuda(int idAjuda, String atributo){
+		
+	}
+	
 	/**
 	 * metodo que invoca o metodo  cadastrarAluno do controllerAluno
 	 */
