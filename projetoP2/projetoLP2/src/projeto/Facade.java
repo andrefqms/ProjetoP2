@@ -75,11 +75,11 @@ public class Facade {
 	public boolean consultaLocal(String email, String local){
 		return this.sistema.controllerTutor.consultaLocal(email, local);
 	}
-	public int pedirAjudaPresencial (String matrAluno, String disciplina, String horario, String dia, String localInteresse){
-		return this.controllerTutor.pedirAjudaPresencial(matrAluno, disciplina, horario, dia, localInteresse);
+	public int pedirAjudaPresencial (String matrAluno, String disciplina, String horario, String dia, String localInteresse){		
+		return this.sistema.pedirAjudaPresencial(matrAluno, disciplina, horario, dia, localInteresse);
 	}
-	public int pedirAjudaOnline (String disciplina){
-		return this.sistema.pedirAjudaOnline(disciplina);
+	public int pedirAjudaOnline (String matrAluno, String disciplina){
+		return this.sistema.pedirAjudaOnline(matrAluno, disciplina);
 	}
 	public String pegarTutor(int idAjuda){
 		return this.sistema.pegarTutor(idAjuda);
