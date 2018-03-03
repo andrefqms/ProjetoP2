@@ -1,17 +1,15 @@
 package projeto;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
-import java.util.Iterator;
 
 public class ControllerTutor {
 
 	private HashSet<Tutor> tutores;
-	private ArrayList<Ajuda> ajudas;
 
 	public ControllerTutor() {
 		this.tutores = new HashSet<>();
-		this.ajudas = new ArrayList<>();
 	}
 
 	/**
@@ -202,23 +200,10 @@ public class ControllerTutor {
 	 * proficiencia e e retorna esse tal tutor
 	 */
 	public Tutor ProcurarTutorProficiencia(ArrayList<Tutor> lista) {
-		Tutor tutor = null;
-		for (int i = 0; i < lista.size(); i++) {
-			tutor = lista.get(i);
-			if (lista.get(i).getProficiencia() == lista.get(i + 1).getProficiencia()) {
-				tutor = lista.get(i);
-			}
-			if (lista.get(i).getProficiencia() < lista.get(i + 1).getProficiencia()) {
-				tutor = lista.get(i + 1);
-			} else {
-				tutor = lista.get(i);
-			}
-
-		}
-
-		return tutor;
+		Collections.sort(lista);
+		return lista.get(0);
 	}
-
+/**
 	public int pedirAjudaPresencial(String matrAluno, String disciplina, String horario, String dia,
 			String localInteresse) {
 		Tutor tutor = null;
@@ -240,5 +225,5 @@ public class ControllerTutor {
 
 		return ajudas.size();
 	}
-
+*/
 }

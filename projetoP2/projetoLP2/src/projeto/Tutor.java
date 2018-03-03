@@ -2,7 +2,7 @@ package projeto;
 
 import java.util.ArrayList;
 
-public class Tutor extends Aluno {
+public class Tutor extends Aluno implements Comparable<Tutor>{
 	/**
 	 * Atributos
 	 */
@@ -89,6 +89,18 @@ public class Tutor extends Aluno {
 	@Override
 	public String toString() {
 		return super.toString();
+	}
+	@Override
+	public int compareTo(Tutor o) {
+		if(this.proficiencia > o.getProficiencia()){
+			return 1;
+		}
+		else if(this.proficiencia < o.getProficiencia()){
+			return -1;
+		}
+		else{
+			return 0;
+		}
 	}
 
 }

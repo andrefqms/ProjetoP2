@@ -1,32 +1,71 @@
 package projeto;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Sistema {
 
 	ControllerAluno controllerAluno;
 	ControllerTutor controllerTutor;
-	private ArrayList<Tutor> tutoresPedido;
-	private ArrayList<Tutor> pedidos;
+	private ArrayList<Tutor> tutoresAssociados;
+	private ArrayList<Ajuda> pedidos;
+
 
 	public Sistema() {
 		this.controllerAluno = new ControllerAluno();
 		this.controllerTutor = new ControllerTutor();
-		this.tutoresPedido = new ArrayList<>();
+		this.tutoresAssociados = new ArrayList<>();
 		this.pedidos = new ArrayList<>();
+
 	}
 	
-	public int pedirAjudaOnline (String disciplina){
-		Tutor tutor = null;
-		tutor = controllerTutor.ProcurarTutorProficiencia(controllerTutor.ProcurarTutorDisciplina(disciplina));
-		tutoresPedido.add(tutor);
-		return tutoresPedido.size();
+	public int pedirAjudaPresencial (String matrAluno, String disciplina, String horario, String dia, String localInteresse)throws IllegalArgumentException{
+		AjudaPresencial ajuda = new AjudaPresencial(matrAluno, disciplina, horario, dia, localInteresse);
+		Tutor tutor = controllerTutor.ProcurarTutorProficiencia(controllerTutor.ProcurarTutorDisciplina(disciplina));
+		if(controllerTutor.consultaHorario(tutor.getEmail(), horario, dia) && controllerTutor.consultaLocal(tutor.getEmail(), localInteresse)){
+				tutoresAssociados.add(tutor);
+
+		}
+		pedidos.add(ajuda);
+		return pedidos.size();
 	}
-	public String pegarTutor(int idAjuda){
-		return tutoresPedido.get(idAjuda-1).toString();
+	public int pedirAjudaOnline (String matrAluno, String disciplina)throws IllegalArgumentException{
+		AjudaOnline ajuda = new AjudaOnline(matrAluno, disciplina);
+		Tutor tutor = controllerTutor.ProcurarTutorProficiencia(controllerTutor.ProcurarTutorDisciplina(disciplina));
+		tutoresAssociados.add(tutor);
+		pedidos.add(ajuda);
+		return pedidos.size();
 	}
-	public String getInfoAjuda(int idAjuda, String atributo){
+	public String pegarTutor(int idAjuda)throws IllegalArgumentException{
+		if(idAjuda < 0 ){
+			throw new IllegalArgumentException("Erro ao tentar recuperar tutor : id nao pode menor que zero ");
+		}
+		if(idAjuda > tutoresAssociados.size()){
+			throw new IllegalArgumentException("Erro ao tentar recuperar tutor : id nao encontrado ");
+		}
+		return "Tutor - " + tutoresAssociados.get(idAjuda-1).getMatricula() + ", " + pedidos.get(idAjuda-1).toString();
+	}
+	public String getInfoAjuda(int idAjuda, String atributo)throws IllegalArgumentException{
+		if(idAjuda < 0 ){
+			throw new IllegalArgumentException("Erro ao tentar recuperar info da ajuda : id nao pode menor que zero ");
+		}
+		if(atributo.trim().equals("") || atributo.equals(null)){
+			throw new IllegalArgumentException("Erro ao tentar recuperar info da ajuda : atributo nao pode ser vazio ou em branco");
+		}
+		if(idAjuda > tutoresAssociados.size()){
+			throw new IllegalArgumentException("Erro ao tentar recuperar info da ajuda : id nao encontrado ");
+		}
+		if(!atributo.equalsIgnoreCase("disciplina") && !atributo.equalsIgnoreCase("horario") && !atributo.equalsIgnoreCase("dia") && !atributo.equalsIgnoreCase("localInteresse")){
+			throw new IllegalArgumentException("Erro ao tentar recuperar info da ajuda : atributo nao encontrado");
+		}
+		String retorno = "";
+		if(atributo.equals("disciplina")){
+				retorno = pedidos.get(idAjuda-1).getDisciplina();
+		}else if(atributo.equals("matricula")){
+				retorno = tutoresAssociados.get(idAjuda-1).getMatricula();
+		}			
 		
+		return retorno;
 	}
 	
 	/**
@@ -95,5 +134,5 @@ public class Sistema {
 	public boolean consultaLocal(String email, String local) {
 		return controllerTutor.consultaLocal(email, local);
 	}
-
+	
 }
