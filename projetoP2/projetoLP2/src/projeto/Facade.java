@@ -5,14 +5,16 @@ import easyaccept.EasyAccept;
 public class Facade {
 
 	private Sistema sistema;
+	private ControllerTutor controllerTutor;
 
 	public static void main(String[] args) {
-		args = new String[] { "projeto.Facade", "acceptance_test/us1_test.txt", "acceptance_test/us2_test.txt","acceptance_test/us3_test.txt"};
+		args = new String[] { "projeto.Facade", "acceptance_test/us1_test.txt", "acceptance_test/us2_test.txt","acceptance_test/us3_test.txt", "acceptance_test/us4_test.txt"};
 		EasyAccept.main(args);
 	}
 	
 	public Facade() {
 		this.sistema = new Sistema();
+		this.controllerTutor = new ControllerTutor();
 	}
 	/**
 	 * Delegacao do metodo cadastrarAluno
@@ -73,8 +75,8 @@ public class Facade {
 	public boolean consultaLocal(String email, String local){
 		return this.sistema.controllerTutor.consultaLocal(email, local);
 	}
-	public int pedirAjudaPresencial (String disciplina, String horario, String dia, String localInteresse){
-		return this.sistema.pedirAjudaPresencial(disciplina, horario, dia, localInteresse);
+	public int pedirAjudaPresencial (String matrAluno, String disciplina, String horario, String dia, String localInteresse){
+		return this.controllerTutor.pedirAjudaPresencial(matrAluno, disciplina, horario, dia, localInteresse);
 	}
 	public int pedirAjudaOnline (String disciplina){
 		return this.sistema.pedirAjudaOnline(disciplina);

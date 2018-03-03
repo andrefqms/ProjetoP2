@@ -7,10 +7,13 @@ import java.util.Iterator;
 public class ControllerTutor {
 
 	private HashSet<Tutor> tutores;
+	private ArrayList<Ajuda> ajudas;
 
 	public ControllerTutor() {
 		this.tutores = new HashSet<>();
+		this.ajudas = new ArrayList<>();
 	}
+
 	/**
 	 * Metodo que procura certo tutor e retorna ele
 	 */
@@ -22,6 +25,7 @@ public class ControllerTutor {
 		}
 		return null;
 	}
+
 	/**
 	 * Metodo que procura certo tutor que tem tal disciplina e retorna ele
 	 */
@@ -34,6 +38,7 @@ public class ControllerTutor {
 		}
 		return lista;
 	}
+
 	/**
 	 * metodo que torna um aluno em tutor
 	 */
@@ -61,6 +66,7 @@ public class ControllerTutor {
 		tutores.add(tutor);
 
 	}
+
 	/**
 	 * metodo que retorna o tostring de um certo tutor
 	 */
@@ -77,6 +83,7 @@ public class ControllerTutor {
 
 		return msg;
 	}
+
 	/**
 	 * metodo que retorna a lista de co mo tostring de cada tutor
 	 */
@@ -90,6 +97,7 @@ public class ControllerTutor {
 
 		return retorno;
 	}
+
 	/**
 	 * metodo que retorna um certo tutor de acordo com o email
 	 */
@@ -101,20 +109,22 @@ public class ControllerTutor {
 		}
 		return null;
 	}
+
 	/**
 	 * Metodo que cadastra o horario de atendimento
 	 */
-	public void cadastrarHorario(ControllerTutor controllerTutor, String email, String horario, String dia) throws IllegalArgumentException{
-		if(dia.trim().equals("") || dia == null){
+	public void cadastrarHorario(ControllerTutor controllerTutor, String email, String horario, String dia)
+			throws IllegalArgumentException {
+		if (dia.trim().equals("") || dia == null) {
 			throw new IllegalArgumentException("Erro no cadastrar horario: dia nao pode ser vazio ou em branco");
 		}
-		if(horario.trim().equals("") || horario == null){
+		if (horario.trim().equals("") || horario == null) {
 			throw new IllegalArgumentException("Erro no cadastrar horario: horario nao pode ser vazio ou em branco");
 		}
-		if(email.trim().equals("") || email == null){
+		if (email.trim().equals("") || email == null) {
 			throw new IllegalArgumentException("Erro no cadastrar horario: email nao pode ser vazio ou em branco");
 		}
-		if(ProcurarTutorEmail(email) == null){
+		if (ProcurarTutorEmail(email) == null) {
 			throw new IllegalArgumentException("Erro no cadastrar horario: tutor nao cadastrado");
 		}
 
@@ -125,17 +135,21 @@ public class ControllerTutor {
 			}
 		}
 	}
+
 	/**
 	 * metodo que cadastra o local de atendimento
 	 */
-	public void cadastrarLocalDeAtendimento(ControllerTutor controllerTutor,String email, String local) throws IllegalArgumentException{
-		if(local.trim().equals("") || local == null){
-			throw new IllegalArgumentException("Erro no cadastrar local de atendimento: local nao pode ser vazio ou em branco");
+	public void cadastrarLocalDeAtendimento(ControllerTutor controllerTutor, String email, String local)
+			throws IllegalArgumentException {
+		if (local.trim().equals("") || local == null) {
+			throw new IllegalArgumentException(
+					"Erro no cadastrar local de atendimento: local nao pode ser vazio ou em branco");
 		}
-		if(email.trim().equals("") || email == null){
-			throw new IllegalArgumentException("Erro no cadastrar local de atendimento: email nao pode ser vazio ou em branco");
+		if (email.trim().equals("") || email == null) {
+			throw new IllegalArgumentException(
+					"Erro no cadastrar local de atendimento: email nao pode ser vazio ou em branco");
 		}
-		if(ProcurarTutorEmail(email) == null){
+		if (ProcurarTutorEmail(email) == null) {
 			throw new IllegalArgumentException("Erro no cadastrar local de atendimento: tutor nao cadastrado");
 		}
 		for (Tutor tutor : tutores) {
@@ -144,6 +158,7 @@ public class ControllerTutor {
 			}
 		}
 	}
+
 	/**
 	 * metodo que retorna true se possui certo horario de atendimento e false se nao
 	 */
@@ -159,6 +174,7 @@ public class ControllerTutor {
 		}
 		return false;
 	}
+
 	/**
 	 * metodo que retorna true se possui certo local de atendimento e false se nao
 	 */
@@ -171,34 +187,58 @@ public class ControllerTutor {
 		return false;
 
 	}
+
 	/**
 	 * metodo acessor do arraylist com os tutores
+	 * 
 	 * @return os tutores
 	 */
 	public HashSet<Tutor> getTutores() {
 		return tutores;
 	}
+
 	/**
-	 * metodo que ao receber uma lista com tutores , procura o que tem melhor proficiencia e
-	 * e retorna esse tal tutor
+	 * metodo que ao receber uma lista com tutores , procura o que tem melhor
+	 * proficiencia e e retorna esse tal tutor
 	 */
-	public Tutor ProcurarTutorProficiencia(ArrayList<Tutor> lista){
-		Tutor tutor= null;
+	public Tutor ProcurarTutorProficiencia(ArrayList<Tutor> lista) {
+		Tutor tutor = null;
 		for (int i = 0; i < lista.size(); i++) {
 			tutor = lista.get(i);
-			if(lista.get(i).getProficiencia() == lista.get(i+1).getProficiencia()){
+			if (lista.get(i).getProficiencia() == lista.get(i + 1).getProficiencia()) {
 				tutor = lista.get(i);
 			}
-			if(lista.get(i).getProficiencia() < lista.get(i+1).getProficiencia()){
-					tutor = lista.get(i+1);
+			if (lista.get(i).getProficiencia() < lista.get(i + 1).getProficiencia()) {
+				tutor = lista.get(i + 1);
+			} else {
+				tutor = lista.get(i);
 			}
-			else{
-					tutor = lista.get(i);
-			}
-			
-		}		
-			
+
+		}
+
 		return tutor;
 	}
+
+	public int pedirAjudaPresencial(String matrAluno, String disciplina, String horario, String dia,
+			String localInteresse) {
+		Tutor tutor = null;
+		for (Tutor tutor2 : tutores) {
+			if (tutor2.getDisciplinas().contains(disciplina) && tutor2.getLocal().equalsIgnoreCase(localInteresse)
+					&& tutor2.getDias().contains(dia) && tutor2.getHorarios().contains(horario)) {
+				for (int i = 0; i < tutor2.getDias().size(); i++) {
+					if (tutor2.getDias().get(i).equalsIgnoreCase(dia) && tutor2.getHorarios().get(i).equals(horario)
+							&& tutor2.getProficiencia() > tutor.getProficiencia()) {
+						AjudaPresencial ajuda = new AjudaPresencial(matrAluno, disciplina, horario, dia, localInteresse);
+						ajudas.add(ajuda);
+						tutor = tutor2;
+					}
+				}
+			}
+		}
+
 	
+
+		return ajudas.size();
+	}
+
 }
