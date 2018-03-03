@@ -15,14 +15,7 @@ public class Sistema {
 		this.tutoresPedido = new ArrayList<>();
 		this.pedidos = new ArrayList<>();
 	}
-	public int pedirAjudaPresencial (String disciplina, String horario, String dia, String localInteresse){
-		Tutor tutor = null;
-		tutor = controllerTutor.ProcurarTutorProficiencia(controllerTutor.ProcurarTutorDisciplina(disciplina));
-		if(controllerTutor.consultaHorario(tutor.getEmail(), horario, dia) && controllerTutor.consultaLocal(tutor.getEmail(), localInteresse)){
-			tutoresPedido.add(tutor);
-		}
-		return tutoresPedido.size();
-	}
+	
 	public int pedirAjudaOnline (String disciplina){
 		Tutor tutor = null;
 		tutor = controllerTutor.ProcurarTutorProficiencia(controllerTutor.ProcurarTutorDisciplina(disciplina));
