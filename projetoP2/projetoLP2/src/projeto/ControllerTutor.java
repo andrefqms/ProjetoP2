@@ -7,9 +7,11 @@ import java.util.HashSet;
 public class ControllerTutor {
 
 	private HashSet<Tutor> tutores;
+	private ControllerAluno controllerAluno;
 
 	public ControllerTutor() {
 		this.tutores = new HashSet<>();
+		this.controllerAluno = new ControllerAluno();
 	}
 
 	/**
@@ -62,6 +64,7 @@ public class ControllerTutor {
 		}
 
 		tutores.add(tutor);
+		controllerAluno.getAlunos().remove(tutor);
 
 	}
 
@@ -203,6 +206,9 @@ public class ControllerTutor {
 		Collections.sort(lista);
 		return lista.get(0);
 	}
+	
+
+	
 /**
 	public int pedirAjudaPresencial(String matrAluno, String disciplina, String horario, String dia,
 			String localInteresse) {
