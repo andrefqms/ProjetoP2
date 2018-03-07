@@ -7,11 +7,9 @@ import java.util.HashSet;
 public class ControllerTutor {
 
 	private HashSet<Tutor> tutores;
-	private ControllerAluno controllerAluno;
 
 	public ControllerTutor() {
 		this.tutores = new HashSet<>();
-		this.controllerAluno = new ControllerAluno();
 	}
 
 	/**
@@ -207,29 +205,4 @@ public class ControllerTutor {
 		return lista.get(0);
 	}
 	
-
-	
-/**
-	public int pedirAjudaPresencial(String matrAluno, String disciplina, String horario, String dia,
-			String localInteresse) {
-		Tutor tutor = null;
-		for (Tutor tutor2 : tutores) {
-			if (tutor2.getDisciplinas().contains(disciplina) && tutor2.getLocal().equalsIgnoreCase(localInteresse)
-					&& tutor2.getDias().contains(dia) && tutor2.getHorarios().contains(horario)) {
-				for (int i = 0; i < tutor2.getDias().size(); i++) {
-					if (tutor2.getDias().get(i).equalsIgnoreCase(dia) && tutor2.getHorarios().get(i).equals(horario)
-							&& tutor2.getProficiencia() > tutor.getProficiencia()) {
-						AjudaPresencial ajuda = new AjudaPresencial(matrAluno, disciplina, horario, dia, localInteresse);
-						ajudas.add(ajuda);
-						tutor = tutor2;
-					}
-				}
-			}
-		}
-
-	
-
-		return ajudas.size();
-	}
-*/
 }

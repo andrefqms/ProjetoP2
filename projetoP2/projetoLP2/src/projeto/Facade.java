@@ -8,7 +8,8 @@ public class Facade {
 	private ControllerTutor controllerTutor;
 
 	public static void main(String[] args) {
-		args = new String[] { "projeto.Facade", "acceptance_test/us1_test.txt", "acceptance_test/us2_test.txt","acceptance_test/us3_test.txt", "acceptance_test/us4_test.txt", "acceptance_test/us5_test.txt"};
+		args = new String[] { "projeto.Facade", "acceptance_test/us1_test.txt", "acceptance_test/us2_test.txt",
+				"acceptance_test/us3_test.txt", "acceptance_test/us4_test.txt", "acceptance_test/us5_test.txt", "acceptance_test/us6_test.txt"};
 		EasyAccept.main(args);
 	}
 	
@@ -75,7 +76,7 @@ public class Facade {
 	public boolean consultaLocal(String email, String local){
 		return this.sistema.controllerTutor.consultaLocal(email, local);
 	}
-	public int pedirAjudaPresencial (String matrAluno, String disciplina, String horario, String dia, String localInteresse){		
+	public int pedirAjudaPresencial (String matrAluno, String disciplina, String horario, String dia, String localInteresse){
 		return this.sistema.pedirAjudaPresencial(matrAluno, disciplina, horario, dia, localInteresse);
 	}
 	public int pedirAjudaOnline (String matrAluno, String disciplina){
@@ -92,5 +93,18 @@ public class Facade {
 	}
 	public String pegarNota(String matriculaTutor) {
 		return this.sistema.pegarNota(matriculaTutor);
+	}
+	public String pegarNivel(String matriculaTutor){
+		return this.sistema.pegarNivel(matriculaTutor);
+	}
+	public void doar(String matriculaTutor, int totalCentavos){
+		this.sistema.doar(matriculaTutor, totalCentavos);;
+	}
+	public int totalDinheiroTutor(String emailTutor){
+		return this.sistema.totalDinheiroTutor(emailTutor);
+	}
+	public int totalDinheiroSistema(){
+		return this.sistema.totalDinheiroSistema();
+
 	}
 }

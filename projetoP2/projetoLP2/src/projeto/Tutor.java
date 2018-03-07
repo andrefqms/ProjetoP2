@@ -9,17 +9,18 @@ public class Tutor extends Aluno implements Comparable<Tutor>{
 	private ArrayList<String> horarios;
 	private ArrayList<String> dias;
 	private String local;
-	private int proficiencia, dinheiro;
+	private int proficiencia;
+	private double dinheiro;
 	private ArrayList<String> disciplinas;
 	private double avaliacao;
+	public String Nivel;
 
-	public Tutor(String nome, String matricula, int codigoCurso, String telefone, String email, int proficiencia) {
+	public Tutor(String nome, String matricula, int codigoCurso, String telefone, String email, int proficiencia)throws IllegalArgumentException {
 		super(nome, matricula, codigoCurso, telefone, email);
-
 		this.disciplinas = new ArrayList<String>();
 		this.proficiencia = proficiencia;
 		this.avaliacao = 4.00;
-		this.dinheiro = 0;
+		this.dinheiro = 0.0;
 		this.dias = new ArrayList<String>();
 		this.horarios = new ArrayList<String>();
 		this.local = "";
@@ -45,7 +46,7 @@ public class Tutor extends Aluno implements Comparable<Tutor>{
 	/**
 	 * metodo que retorna o dinheiro
 	 */
-	public int getDinheiro() {
+	public double getDinheiro() {
 		return dinheiro;
 	}
 	/**
@@ -84,7 +85,14 @@ public class Tutor extends Aluno implements Comparable<Tutor>{
 	public void setLocal(String local) {
 		this.local = local;
 	}
-	
+	/**
+	 * metodo modificador do dinheiro
+	 */
+	public void setDinheiro(double d) {
+		this.dinheiro += d;
+	}/**
+	 * metodo modificador da avaliacao
+	 */
 	public void setAvaliacao(double avaliacao) {
 		this.avaliacao = avaliacao;
 	}
@@ -95,6 +103,9 @@ public class Tutor extends Aluno implements Comparable<Tutor>{
 	public String toString() {
 		return super.toString();
 	}
+	/**
+	 * metodo de ordenacao compareTo
+	 */
 	@Override
 	public int compareTo(Tutor o) {
 		if(this.proficiencia > o.getProficiencia()){
@@ -106,6 +117,9 @@ public class Tutor extends Aluno implements Comparable<Tutor>{
 		else{
 			return 0;
 		}
+	}
+	public String getNivel() {
+		return Nivel;
 	}
 
 }
