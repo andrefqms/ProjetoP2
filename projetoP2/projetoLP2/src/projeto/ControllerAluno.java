@@ -91,9 +91,15 @@ public class ControllerAluno {
 		}
 		return null;
 	}
+	/*
+	 * metodo que retorna o arrayList com os alunos
+	 */
 	public ArrayList<Aluno> getAlunos() {
 		return alunos;
 	}
+	/*
+	 * metodo que modifica o arrayList com os alunos
+	 */
 	public void setAlunos(ArrayList<Aluno> alunos) {
 		this.alunos = alunos;
 	}
