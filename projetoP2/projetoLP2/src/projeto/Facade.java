@@ -4,8 +4,8 @@ import easyaccept.EasyAccept;
 
 public class Facade {
 
-	private Sistema sistema;
 	private ControllerTutor controllerTutor;
+	private ControllerAluno controllerAluno;
 
 	public static void main(String[] args) {
 		args = new String[] { "projeto.Facade", "acceptance_test/us1_test.txt", "acceptance_test/us2_test.txt",
@@ -14,97 +14,97 @@ public class Facade {
 	}
 	
 	public Facade() {
-		this.sistema = new Sistema();
 		this.controllerTutor = new ControllerTutor();
+		this.controllerAluno = new ControllerAluno();
 	}
 	/**
 	 * Delegacao do metodo cadastrarAluno
 	 */
 	public void cadastrarAluno(String nome, String matricula, int codigoCurso, String telefone, String email) {
-		this.sistema.controllerAluno.cadastrarAluno(nome, matricula, codigoCurso, telefone, email);
+		this.controllerAluno.cadastrarAluno(nome, matricula, codigoCurso, telefone, email);
 	}
 	/**
 	 * Delegacao do metodo recuperaAluno
 	 */
 	public String recuperaAluno(String matricula) {
-		return this.sistema.controllerAluno.recuperaAluno(matricula);
+		return this.controllerAluno.recuperaAluno(matricula);
 	}
 	/**
 	 * Delegacao do metodo getInfoAluno
 	 */
 	public String getInfoAluno(String matricula, String atributo) {
-		return this.sistema.controllerAluno.getInfoAluno(matricula, atributo);
+		return this.controllerAluno.getInfoAluno(matricula, atributo);
 	}
 	/**
 	 * Delegacao do metodo listarAlunos
 	 */
 	public String listarAlunos() {
-		return this.sistema.controllerAluno.listarAlunos();
+		return this.controllerAluno.listarAlunos();
 	}/**
 	 * Delegacao do metodo tornarTutor
 	 */
 	public void tornarTutor(String matricula, String disciplina, int proficiencia){
-		this.sistema.controllerTutor.tornarTutor(sistema.controllerAluno, matricula, disciplina, proficiencia);
+		this.controllerTutor.tornarTutor(controllerAluno, matricula, disciplina, proficiencia);
 	}/**
 	 * Delegacao do metodo recuperaTutor
 	 */
 	public String recuperaTutor(String matricula){
-		return this.sistema.controllerTutor.recuperaTutor(matricula);
+		return this.controllerTutor.recuperaTutor(matricula);
 	}/**
 	 * Delegacao do metodo listarTutores
 	 */
 	public String listarTutores(){
-		return this.sistema.controllerTutor.listarTutores();
+		return this.controllerTutor.listarTutores();
 	}/**
 	 * Delegacao do metodo cadastrarHorario
 	 */
 	public void cadastrarHorario(String email, String horario, String dia){
-		this.sistema.controllerTutor.cadastrarHorario(sistema.controllerTutor, email, horario, dia);
+		this.controllerTutor.cadastrarHorario(controllerTutor, email, horario, dia);
 	}/**
 	 * Delegacao do metodo cadastrarLocalDeAtendimento
 	 */
 	public void cadastrarLocalDeAtendimento(String email, String local){
-		this.sistema.controllerTutor.cadastrarLocalDeAtendimento(sistema.controllerTutor, email, local);
+		this.controllerTutor.cadastrarLocalDeAtendimento(controllerTutor, email, local);
 	}/**
 	 * Delegacao do metodo consultaHorario
 	 */
 	public boolean consultaHorario(String email, String horario, String dia){
-		return this.sistema.controllerTutor.consultaHorario(email, horario, dia);
+		return this.controllerTutor.consultaHorario(email, horario, dia);
 	}/**
 	 * Delegacao do metodo consultaLocal
 	 */
 	public boolean consultaLocal(String email, String local){
-		return this.sistema.controllerTutor.consultaLocal(email, local);
+		return this.controllerTutor.consultaLocal(email, local);
 	}
 	public int pedirAjudaPresencial (String matrAluno, String disciplina, String horario, String dia, String localInteresse){
-		return this.sistema.pedirAjudaPresencial(matrAluno, disciplina, horario, dia, localInteresse);
+		return this.controllerTutor.pedirAjudaPresencial(matrAluno, disciplina, horario, dia, localInteresse);
 	}
 	public int pedirAjudaOnline (String matrAluno, String disciplina){
-		return this.sistema.pedirAjudaOnline(matrAluno, disciplina);
+		return this.controllerTutor.pedirAjudaOnline(matrAluno, disciplina);
 	}
 	public String pegarTutor(int idAjuda){
-		return this.sistema.pegarTutor(idAjuda);
+		return this.controllerTutor.pegarTutor(idAjuda);
 	}
 	public String getInfoAjuda(int idAjuda, String atributo){
-		return this.sistema.getInfoAjuda(idAjuda, atributo);
+		return this.controllerTutor.getInfoAjuda(idAjuda, atributo);
 	}
 	public String avaliarTutor(int idAjuda, int nota) {
-		return this.sistema.avaliarTutor(idAjuda, nota);
+		return this.controllerTutor.avaliarTutor(idAjuda, nota);
 	}
 	public String pegarNota(String matriculaTutor) {
-		return this.sistema.pegarNota(matriculaTutor);
+		return this.controllerTutor.pegarNota(matriculaTutor);
 	}
 	public String pegarNivel(String matriculaTutor){
-		return this.sistema.pegarNivel(matriculaTutor);
+		return this.controllerTutor.pegarNivel(matriculaTutor);
 	}
 	public void doar(String matriculaTutor, int totalCentavos){
-		this.sistema.doar(matriculaTutor, totalCentavos);;
+		this.controllerTutor.doar(matriculaTutor, totalCentavos);;
 	}
 	public int totalDinheiroTutor(String emailTutor){
-		return this.sistema.totalDinheiroTutor(emailTutor);
+		return this.controllerTutor.totalDinheiroTutor(emailTutor);
 	}
 	public int totalDinheiroSistema(){
-		return this.sistema.totalDinheiroSistema();
+		return this.controllerTutor.totalDinheiroSistema();
 
 	}
 }
