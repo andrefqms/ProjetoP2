@@ -3,9 +3,10 @@ package projeto;
 public class AjudaPresencial extends Ajuda {
 
 	private String horario, dia, localInteresse;
+
 	
-	public AjudaPresencial(String matricula, String disciplina, String horario, String dia, String localInteresse)throws IllegalArgumentException {
-		super(matricula, disciplina);
+	public AjudaPresencial(int id, String matricula, String disciplina, String horario, String dia, String localInteresse, String matriculaTutor)throws IllegalArgumentException {
+		super(id,matricula, disciplina, matriculaTutor);
 		if(matricula.trim().equals("") || matricula.equals(null)){
 			throw new IllegalArgumentException("Erro no pedido de ajuda presencial: matricula de aluno nao pode ser vazio ou em branco");
 		}
@@ -23,13 +24,14 @@ public class AjudaPresencial extends Ajuda {
 		}
 		this.horario = horario;
 		this.dia = dia;
-		this.localInteresse = localInteresse;		
+		this.localInteresse = localInteresse;
+		
 	}
 
 	public String getHorario() {
 		return horario;
 	}
-
+		
 	public void setHorario(String horario) {
 		this.horario = horario;
 	}

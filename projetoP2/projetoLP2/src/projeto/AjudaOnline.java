@@ -2,8 +2,8 @@ package projeto;
 
 public class AjudaOnline extends Ajuda{
 
-	public AjudaOnline(String matricula, String disciplina)throws IllegalArgumentException {
-		super(matricula, disciplina);
+	public AjudaOnline(int id,String matricula, String disciplina, String matriculaTutor)throws IllegalArgumentException {
+		super(id, matricula, disciplina, matriculaTutor);
 		if(matricula.trim().equals("") || matricula.equals(null)){
 			throw new IllegalArgumentException("Erro no pedido de ajuda online: matricula de aluno nao pode ser vazio ou em branco");
 		}

@@ -13,7 +13,7 @@ public class Tutor extends Aluno implements Comparable<Tutor>{
 	private double dinheiro;
 	private ArrayList<String> disciplinas;
 	private double avaliacao;
-	public String Nivel;
+	private String Nivel;
 
 	public Tutor(String nome, String matricula, int codigoCurso, String telefone, String email, int proficiencia)throws IllegalArgumentException {
 		super(nome, matricula, codigoCurso, telefone, email);
