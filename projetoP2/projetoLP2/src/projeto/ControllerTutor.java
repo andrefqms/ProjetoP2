@@ -1,5 +1,6 @@
 package projeto;
 
+import java.awt.List;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -17,6 +18,20 @@ public class ControllerTutor {
 		this.pedidos = new ArrayList<>();
 		this.total = 0;
 	}
+	public void configurarOrdem(String atributo) {
+		ArrayList<Tutor> sortedList = new ArrayList<>();
+		sortedList.addAll(tutores);
+		Collections.sort(sortedList);
+		if (atributo.equalsIgnoreCase("email")) {
+			Collections.sort(sortedList, new TutorComparatorEmail());	
+		} else if (atributo.equalsIgnoreCase("matricula")) {
+			Collections.sort(sortedList, new TutorComparatorEmail());
+		} else if (atributo.equalsIgnoreCase("nome")) {
+			Collections.sort(sortedList, new TutorComparatorEmail());
+		}
+		tutores.removeAll(tutores);
+		tutores.addAll(sortedList);
+	}
 	public int pedirAjudaPresencial(String matrAluno, String disciplina, String horario, String dia,
 			String localInteresse) throws IllegalArgumentException {
 		AjudaPresencial ajuda = new AjudaPresencial(matrAluno, disciplina, horario, dia, localInteresse);
@@ -33,8 +48,11 @@ public class ControllerTutor {
 	public int pedirAjudaOnline(String matrAluno, String disciplina) throws IllegalArgumentException {
 		AjudaOnline ajuda = new AjudaOnline(matrAluno, disciplina);
 		Tutor tutor = ProcurarTutorProficiencia(ProcurarTutorDisciplina(disciplina));
-		tutoresAssociados.add(tutor);
-		pedidos.add(ajuda);
+		if(!tutor.equals(null) && !ajuda.equals(null)){
+				tutoresAssociados.add(tutor);
+				pedidos.add(ajuda);
+
+		}
 		return pedidos.size();
 	}
 

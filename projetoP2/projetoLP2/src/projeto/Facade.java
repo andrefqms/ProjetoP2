@@ -107,4 +107,8 @@ public class Facade {
 		return this.controllerTutor.totalDinheiroSistema();
 
 	}
+	public void configurarOrdem(String atributo) {
+		this.controllerAluno.configurarOrdem(atributo);
+		this.controllerTutor.configurarOrdem(atributo);
+	}
 }

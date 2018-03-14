@@ -2,12 +2,12 @@ package projeto;
 
 import java.util.Comparator;
 
-public class AlunoComparator implements Comparator<Aluno> {
+public class TutorComparatorEmail  implements Comparator<Tutor> {
 	/**
-	 * metodo compare da interface Comparator que compara dois alunos
+	 * metodo compare da interface Comparator que compara dois  tutores
 	 */
 	@Override
-	public int compare(Aluno a1, Aluno a2) {
+	public int compare(Tutor a1, Tutor a2) {
 	if( a1.getNome().compareTo(a2.getNome()) == 0){
  		return a1.getMatricula().compareTo(a2.getMatricula());
 	}

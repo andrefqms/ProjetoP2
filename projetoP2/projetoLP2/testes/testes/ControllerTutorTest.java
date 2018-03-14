@@ -120,5 +120,27 @@ public class ControllerTutorTest {
 		assertEquals(true, controller.consultaLocal("daniel.jose.leite@ccc.ufcg.edu.br", "LCC3"));
 
 	}
-
+	@Test
+	public void testPedirAjudaOnline(){
+		aluno.cadastrarAluno("José", "9999999", 22, "9696-9898", "jose.email@bol.com.br");
+		controller.tornarTutor(aluno, "9999999", "P2", 4);
+		aluno.cadastrarAluno("Daniel", "116210607", 22, "98485-5554", "daniel.jose.leite@ccc.ufcg.edu.br");
+		controller.tornarTutor(aluno, "116210607", "P2", 5);
+		controller.cadastrarLocalDeAtendimento(controller, "daniel.jose.leite@ccc.ufcg.edu.br", "LCC3");
+		controller.cadastrarHorario(controller, "daniel.jose.leite@ccc.ufcg.edu.br", "12:00", "seg");
+		controller.pedirAjudaPresencial("116210600", "P2","12:00", "seg", "LCC3");
+		assertEquals(2,controller.pedirAjudaOnline("116210600","P2"));
+	}
+	@Test
+	public void testPedirAjudaPresencial(){
+		aluno.cadastrarAluno("José", "9999999", 22, "9696-9898", "jose.email@bol.com.br");
+		controller.tornarTutor(aluno, "9999999", "P2", 4);
+		aluno.cadastrarAluno("Daniel", "116210607", 22, "98485-5554", "daniel.jose.leite@ccc.ufcg.edu.br");
+		controller.tornarTutor(aluno, "116210607", "P2", 5);
+		controller.cadastrarLocalDeAtendimento(controller, "daniel.jose.leite@ccc.ufcg.edu.br", "LCC3");
+		controller.cadastrarHorario(controller, "daniel.jose.leite@ccc.ufcg.edu.br", "12:00", "seg");
+		controller.pedirAjudaPresencial("116210600", "P2","12:00", "seg", "LCC3");
+		assertEquals(2,controller.pedirAjudaPresencial("116210600","P2","12:00","seg","LCC3"));
+	}
+	
 }

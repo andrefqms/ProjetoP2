@@ -11,6 +11,21 @@ public class ControllerAluno {
 		this.alunos = new ArrayList<Aluno>();
 
 	}
+/**
+ * metodo que ordena a listagem de acordo com o criterio
+ * @param atributo
+ */
+	public void configurarOrdem(String atributo) {
+		if (atributo.equalsIgnoreCase("email")) {
+			Collections.sort(alunos, new AlunoComparatorEmail());	
+		} else if (atributo.equalsIgnoreCase("matricula")) {
+			Collections.sort(alunos, new AlunoComparatorEmail());
+		} else if (atributo.equalsIgnoreCase("nome")) {
+			Collections.sort(alunos, new AlunoComparatorEmail());
+		}
+
+	}
+
 	/**
 	 * metodo que cadastra o aluno
 	 */
@@ -21,6 +36,7 @@ public class ControllerAluno {
 		}
 		this.alunos.add(aluno);
 	}
+
 	/**
 	 * metodo que retorna o tostring de certo aluno
 	 */
@@ -36,6 +52,7 @@ public class ControllerAluno {
 		}
 		return retorno;
 	}
+
 	/**
 	 * metodo que retorna as informacoes de certo aluno
 	 */
@@ -56,6 +73,7 @@ public class ControllerAluno {
 		}
 		return retorno;
 	}
+
 	/**
 	 * metodo que retona o tostring de cada aluno existente
 	 */
@@ -69,6 +87,7 @@ public class ControllerAluno {
 
 		return retorno;
 	}
+
 	/**
 	 * metodo que procura certo aluno de acordo com a matricula
 	 */
@@ -80,6 +99,7 @@ public class ControllerAluno {
 		}
 		return null;
 	}
+
 	/**
 	 * metodo que procura certo aluno de acordo com o email
 	 */
@@ -91,12 +111,14 @@ public class ControllerAluno {
 		}
 		return null;
 	}
+
 	/*
 	 * metodo que retorna o arrayList com os alunos
 	 */
 	public ArrayList<Aluno> getAlunos() {
 		return alunos;
 	}
+
 	/*
 	 * metodo que modifica o arrayList com os alunos
 	 */
