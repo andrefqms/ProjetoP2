@@ -88,8 +88,8 @@ public class Facade {
 	public String getInfoAjuda(int idAjuda, String atributo){
 		return this.controllerTutor.getInfoAjuda(idAjuda, atributo);
 	}
-	public String avaliarTutor(int idAjuda, int nota) {
-		return this.controllerTutor.avaliarTutor(idAjuda, nota);
+	public void avaliarTutor(int idAjuda, int nota) {
+		this.controllerTutor.avaliarTutor(idAjuda, nota);
 	}
 	public String pegarNota(String matriculaTutor) {
 		return this.controllerTutor.pegarNota(matriculaTutor);

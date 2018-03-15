@@ -116,9 +116,35 @@ public class ControllerTutorTest {
 	public void testcadastrarLocalDeAtendimentoEConsultaLocal() {
 		aluno.cadastrarAluno("Daniel", "116210607", 22, "98485-5554", "daniel.jose.leite@ccc.ufcg.edu.br");
 		controller.tornarTutor(aluno, "116210607", "P2", 5);
+		controller.cadastrarHorario(controller, "daniel.jose.leite@ccc.ufcg.edu.br", "12:00", "seg");
 		controller.cadastrarLocalDeAtendimento(controller, "daniel.jose.leite@ccc.ufcg.edu.br", "LCC3");
 		assertEquals(true, controller.consultaLocal("daniel.jose.leite@ccc.ufcg.edu.br", "LCC3"));
+		assertEquals("116210607",controller.matriculaTutorPresencial("P2", "12:00", "seg", "LCC3"));
+		assertEquals("116210607", controller.matriculaTutorOnline("P2"));
+		assertEquals(1, controller.pedirAjudaOnline("111111", "P2"));
+		assertEquals("P2", controller.getInfoAjuda(1, "disciplina"));
+		
 
+	}
+	
+	@Test
+	public void testMatriculaTutorOnline() {
+		aluno.cadastrarAluno("Daniel", "116210607", 22, "98485-5554", "daniel.jose.leite@ccc.ufcg.edu.br");
+		controller.tornarTutor(aluno, "116210607", "P2", 5);
+		controller.cadastrarHorario(controller, "daniel.jose.leite@ccc.ufcg.edu.br", "12:00", "seg");
+		controller.cadastrarLocalDeAtendimento(controller, "daniel.jose.leite@ccc.ufcg.edu.br", "LCC3");
+		assertEquals("116210607", controller.matriculaTutorOnline("P2"));
+		assertEquals(1, controller.pedirAjudaOnline("111111", "P2"));
+		assertEquals("Tutor - 116210607, , disciplina - P2", controller.pegarTutor(1));
+		
+		aluno.cadastrarAluno("Joao", "131313", 23, "98485-524554", "joaozim@ccc.ufcg.edu.br");
+		controller.tornarTutor(aluno, "131313", "LP2", 4);
+		controller.cadastrarHorario(controller, "joaozim@ccc.ufcg.edu.br", "13:00", "ter");
+		controller.cadastrarLocalDeAtendimento(controller, "joaozim@ccc.ufcg.edu.br", "CB");
+		assertEquals("131313", controller.matriculaTutorOnline("LP2"));
+		assertEquals(2, controller.pedirAjudaOnline("22221", "LP2"));
+		assertEquals("Tutor - 131313, , disciplina - LP2", controller.pegarTutor(2));
+		
 	}
 
 }

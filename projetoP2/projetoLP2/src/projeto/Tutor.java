@@ -10,7 +10,7 @@ public class Tutor extends Aluno implements Comparable<Tutor>{
 	private ArrayList<String> dias;
 	private String local;
 	private int proficiencia;
-	private double dinheiro;
+	private int dinheiro;
 	private ArrayList<String> disciplinas;
 	private double avaliacao;
 	private String Nivel;
@@ -20,11 +20,12 @@ public class Tutor extends Aluno implements Comparable<Tutor>{
 		this.disciplinas = new ArrayList<String>();
 		this.proficiencia = proficiencia;
 		this.avaliacao = 4.00;
-		this.dinheiro = 0.0;
+		this.dinheiro = 0;
 		this.dias = new ArrayList<String>();
 		this.horarios = new ArrayList<String>();
 		this.local = "";
 	}
+
 	/**
 	 * metodo que retorna as disciplinas
 	 */
@@ -46,8 +47,14 @@ public class Tutor extends Aluno implements Comparable<Tutor>{
 	/**
 	 * metodo que retorna o dinheiro
 	 */
-	public double getDinheiro() {
+	public int getDinheiro() {
 		return dinheiro;
+	}
+	/**
+	 * metodo modificador do dinheiro
+	 */
+	public void setDinheiro(int dinheiro) {
+		this.dinheiro = dinheiro;
 	}
 	/**
 	 * metodo que retorna os horarios
@@ -85,12 +92,8 @@ public class Tutor extends Aluno implements Comparable<Tutor>{
 	public void setLocal(String local) {
 		this.local = local;
 	}
+	
 	/**
-	 * metodo modificador do dinheiro
-	 */
-	public void setDinheiro(double d) {
-		this.dinheiro += d;
-	}/**
 	 * metodo modificador da avaliacao
 	 */
 	public void setAvaliacao(double avaliacao) {
