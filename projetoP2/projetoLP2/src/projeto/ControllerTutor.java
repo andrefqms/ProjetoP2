@@ -23,7 +23,8 @@ public class ControllerTutor {
 			String localInteresse) throws IllegalArgumentException {
 		String matriculaTutor = matriculaTutorPresencial(disciplina, horario, dia, localInteresse);
 		int id = this.pedidos.size() + 1;
-		AjudaPresencial ajuda = new AjudaPresencial(id, matrAluno, disciplina, horario, dia, localInteresse, matriculaTutor);
+		AjudaPresencial ajuda = new AjudaPresencial(id, matrAluno, disciplina, horario, dia, localInteresse,
+				matriculaTutor);
 		pedidos.put(id, ajuda);
 		ajuda.setMatriculaTutor(matriculaTutor);
 		return id;
@@ -37,20 +38,23 @@ public class ControllerTutor {
 		ajuda.setMatriculaTutor(matriculaTutor);
 		return id;
 	}
-	
+
 	public String matriculaTutorPresencial(String disciplina, String horario, String dia, String localInteresse) {
 		String matricula = "";
 		double avaliacao = 0.0;
 		for (Tutor tutor : this.tutores) {
 			int contador = 0;
-			contador++;
-			if (tutor.getDisciplinas().contains(disciplina)){
-				matricula = tutor.getMatricula();
-				avaliacao = tutor.getAvaliacao();
+	
+			if (tutor.getDisciplinas().contains(disciplina)) {
+				if (tutor.getDias().get(contador).equals(dia)
+					&& tutor.getHorarios().get(contador).equals(horario) && tutor.getLocal().equals(localInteresse))
+					matricula = tutor.getMatricula();
+					avaliacao = tutor.getAvaliacao();
 			}
+			contador++;
 		}
 		return matricula;
-	}	
+	}
 
 	public String matriculaTutorOnline(String disciplina) {
 		String matricula = "";
@@ -61,7 +65,7 @@ public class ControllerTutor {
 				avaliacao = tutor.getAvaliacao();
 			}
 		}
-		
+
 		return matricula;
 	}
 
@@ -72,8 +76,7 @@ public class ControllerTutor {
 		if (idAjuda > pedidos.size()) {
 			throw new IllegalArgumentException("Erro ao tentar recuperar tutor : id nao encontrado ");
 		}
-		return "Tutor - " + pedidos.get(idAjuda).getMatriculaTutor() 
-				+ pedidos.get(idAjuda).toString();
+		return "Tutor - " + pedidos.get(idAjuda).getMatriculaTutor()+ ", " + pedidos.get(idAjuda).toString();
 	}
 
 	public String getInfoAjuda(int idAjuda, String atributo) throws IllegalArgumentException {
@@ -93,7 +96,7 @@ public class ControllerTutor {
 		}
 		String retorno = "";
 		if (atributo.equals("disciplina")) {
-			retorno = pedidos.get(idAjuda ).getDisciplina();
+			retorno = pedidos.get(idAjuda).getDisciplina();
 		} else if (atributo.equals("matricula")) {
 			retorno = tutoresAssociados.get(idAjuda).getMatricula();
 		} else if (atributo.equalsIgnoreCase("dia")) {
@@ -101,29 +104,34 @@ public class ControllerTutor {
 		} else if (atributo.equalsIgnoreCase("horario")) {
 			retorno = ((AjudaPresencial) pedidos.get(idAjuda)).getHorario();
 		} else if (atributo.equalsIgnoreCase("localInteresse")) {
-			retorno = ((AjudaPresencial)pedidos.get(idAjuda)).getLocalInteresse();
+			retorno = ((AjudaPresencial) pedidos.get(idAjuda)).getLocalInteresse();
 		}
 		return retorno;
 	}
 
-	public String avaliarTutor(int idAjuda, int nota) throws IllegalArgumentException {
+	public void avaliarTutor(int idAjuda, int nota) throws IllegalArgumentException {
 		if (nota < 0) {
 			throw new IllegalArgumentException("Erro na avaliacao de tutor: nota nao pode ser menor que 0");
 		}
 		if (nota > 5.0) {
 			throw new IllegalArgumentException("Erro na avaliacao de tutor: nota nao pode ser maior que 5");
 		}
-		if (tutoresAssociados.size() < idAjuda) {
+		if (pedidos.size() < idAjuda) {
 			throw new IllegalArgumentException("Erro na avaliacao de tutor: id nao encontrado ");
 		}
-		if (pedidos.get(idAjuda - 1).getAvaliado() == true) {
+		if (pedidos.get(idAjuda).getAvaliado() == true) {
 			throw new IllegalArgumentException("Erro na avaliacao de tutor: Ajuda ja avaliada");
 		}
 
-		tutoresAssociados.get(idAjuda - 1)
-				.setAvaliacao((tutoresAssociados.get(idAjuda - 1).getAvaliacao() * 5 + nota) / 6);
-		pedidos.get(idAjuda - 1).setAvaliado(true);
-		return tutoresAssociados.get(idAjuda - 1).getMatricula();
+		String matricula = pedidos.get(idAjuda).getMatriculaTutor();
+		for (Tutor tutor : tutores) {
+			if (tutor.getMatricula().equals(matricula)) {
+				tutor.setAvaliacao((tutor.getAvaliacao()*5+nota)/6);
+			}
+		}
+				
+		pedidos.get(idAjuda).setAvaliado(true);
+		//return tutoresAssociados.get(idAjuda - 1).getMatricula();
 	}
 
 	public String pegarNota(String matriculaTutor) {
@@ -158,20 +166,20 @@ public class ControllerTutor {
 		return total;
 	}
 
-	public double calculoDinheiro(String matriculaTutor, int totalCentavos, double nota, double nivel_porcento) {
-		double total;
+	public int calculoDinheiro(String matriculaTutor, int totalCentavos, double nota, double nivel_porcento) {
+		int total;
 		if (ProcurarTutor(matriculaTutor).getAvaliacao() == nota) {
-			return total = (1 - nivel_porcento) * totalCentavos;
+			return total = (int) ((1 - nivel_porcento) * totalCentavos);
 		} else {
 			return calculoDinheiro(matriculaTutor, totalCentavos, nota + 0.1, nivel_porcento + 0.01);
 		}
 
 	}
 
-	public double calculoDinheiro2(String matriculaTutor, int totalCentavos, double nota, double nivel_porcento) {
-		double total;
+	public int calculoDinheiro2(String matriculaTutor, int totalCentavos, double nota, double nivel_porcento) {
+		int total;
 		if (ProcurarTutor(matriculaTutor).getAvaliacao() == nota) {
-			return total = (1 - nivel_porcento) * totalCentavos;
+			return total = (int) ((1 - nivel_porcento) * totalCentavos);
 		} else {
 			return calculoDinheiro(matriculaTutor, totalCentavos, nota - 0.1, nivel_porcento - 0.01);
 		}
