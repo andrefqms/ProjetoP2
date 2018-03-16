@@ -1,8 +1,9 @@
 package projeto;
 
+import java.io.Serializable;
 import java.util.Comparator;
 
-public class AlunoComparator implements Comparator<Aluno> {
+public class AlunoComparator implements Comparator<Aluno>, Serializable {
 	/**
 	 * metodo compare da interface Comparator que compara dois alunos
 	 */

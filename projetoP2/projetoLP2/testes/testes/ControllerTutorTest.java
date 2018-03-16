@@ -2,6 +2,7 @@ package testes;
 
 import static org.junit.Assert.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import org.junit.Before;
@@ -11,7 +12,7 @@ import projeto.ControllerAluno;
 import projeto.ControllerTutor;
 import projeto.Tutor;
 
-public class ControllerTutorTest {
+public class ControllerTutorTest implements Serializable {
 
 	ControllerTutor controller;
 	ControllerAluno aluno;
@@ -128,7 +129,7 @@ public class ControllerTutorTest {
 	}
 	
 	@Test
-	public void testMatriculaTutorOnline() {
+	public void testMatriculaTutorOnlineEPresencial() {
 		aluno.cadastrarAluno("Daniel", "116210607", 22, "98485-5554", "daniel.jose.leite@ccc.ufcg.edu.br");
 		controller.tornarTutor(aluno, "116210607", "P2", 5);
 		controller.cadastrarHorario(controller, "daniel.jose.leite@ccc.ufcg.edu.br", "12:00", "seg");
@@ -144,6 +145,43 @@ public class ControllerTutorTest {
 		assertEquals("131313", controller.matriculaTutorOnline("LP2"));
 		assertEquals(2, controller.pedirAjudaOnline("22221", "LP2"));
 		assertEquals("Tutor - 131313, , disciplina - LP2", controller.pegarTutor(2));
+		
+	}
+	
+	@Test
+	public void testPedirAjudaPresencial() {
+		aluno.cadastrarAluno("Daniel", "116210607", 22, "98485-5554", "daniel.jose.leite@ccc.ufcg.edu.br");
+		controller.tornarTutor(aluno, "116210607", "P2", 5);
+		controller.cadastrarHorario(controller, "daniel.jose.leite@ccc.ufcg.edu.br", "12:00", "seg");
+		controller.cadastrarLocalDeAtendimento(controller, "daniel.jose.leite@ccc.ufcg.edu.br", "LCC3");
+		assertEquals(1, controller.pedirAjudaPresencial("111111", "P2", "12:00", "seg", "LCC3"));
+	}
+	
+	@Test
+	public void testGetInfoAjuda() {
+		aluno.cadastrarAluno("Daniel", "116210607", 22, "98485-5554", "daniel.jose.leite@ccc.ufcg.edu.br");
+		controller.tornarTutor(aluno, "116210607", "P2", 5);
+		controller.cadastrarHorario(controller, "daniel.jose.leite@ccc.ufcg.edu.br", "12:00", "seg");
+		controller.cadastrarLocalDeAtendimento(controller, "daniel.jose.leite@ccc.ufcg.edu.br", "LCC3");
+		assertEquals(1, controller.pedirAjudaPresencial("111111", "P2", "12:00", "seg", "LCC3"));
+		
+		assertEquals("P2", controller.getInfoAjuda(1, "disciplina"));
+		assertEquals("12:00", controller.getInfoAjuda(1, "horario"));
+		assertEquals("seg", controller.getInfoAjuda(1, "Dia"));
+		assertEquals("LCC3", controller.getInfoAjuda(1, "LOCALiNTERESSE"));
+	}
+	
+	@Test
+	public void testAvaliarTutor() {
+		aluno.cadastrarAluno("Daniel", "116210607", 22, "98485-5554", "daniel.jose.leite@ccc.ufcg.edu.br");
+		controller.tornarTutor(aluno, "116210607", "P2", 5);
+		controller.cadastrarHorario(controller, "daniel.jose.leite@ccc.ufcg.edu.br", "12:00", "seg");
+		controller.cadastrarLocalDeAtendimento(controller, "daniel.jose.leite@ccc.ufcg.edu.br", "LCC3");
+		assertEquals(1, controller.pedirAjudaPresencial("111111", "P2", "12:00", "seg", "LCC3"));
+		
+		controller.avaliarTutor(1, 3);
+		assertEquals("3,83", controller.pegarNota("116210607"));
+		assertEquals("Tutor", controller.pegarNivel("116210607"));
 		
 	}
 

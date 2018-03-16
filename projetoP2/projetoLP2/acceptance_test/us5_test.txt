@@ -35,6 +35,8 @@ pedirAjudaPresencial matrAluno="116209078" disciplina="Programacao 2" horario="1
 pegarTutor idAjuda=11
 pedirAjudaPresencial matrAluno="116209078" disciplina="Programacao 2" horario="15:00" dia="seg" localInteresse="LCC3"
 
+
+
 # Testes com exception
 
 expectError "Erro na avaliacao de tutor: Ajuda ja avaliada" avaliarTutor idAjuda=8 nota=5

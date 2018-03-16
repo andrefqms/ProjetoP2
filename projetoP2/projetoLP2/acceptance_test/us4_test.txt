@@ -1,8 +1,6 @@
 ##########################
 # US4 - Cadastrar Pedidos de Ajuda (Presencial ou Online) #
 ##########################
-
-
   
 expect "1" pedirAjudaPresencial matrAluno="116209078" disciplina="Programacao 2" horario="15:00" dia="seg" localInteresse="LCC3"
 expect "2" pedirAjudaPresencial matrAluno="111124242" disciplina="Programacao 2" horario="08:00" dia="qua" localInteresse="LCC3"
