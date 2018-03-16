@@ -1,9 +1,10 @@
 package projeto;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class ControllerAluno {
+public class ControllerAluno implements Serializable {
 
 	private ArrayList<Aluno> alunos;
 

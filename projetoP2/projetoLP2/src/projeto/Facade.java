@@ -1,8 +1,16 @@
 package projeto;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
 import easyaccept.EasyAccept;
 
-public class Facade {
+public class Facade implements Serializable {
 
 	private ControllerTutor controllerTutor;
 	private ControllerAluno controllerAluno;
@@ -16,6 +24,41 @@ public class Facade {
 	public Facade() {
 		this.controllerTutor = new ControllerTutor();
 		this.controllerAluno = new ControllerAluno();
+	}
+	
+	
+	public void salvar() throws ClassNotFoundException, IOException {
+		try {
+			String arquivo = "save.dat";
+			FileOutputStream f = new FileOutputStream(arquivo);
+			ObjectOutputStream obj = new ObjectOutputStream(f);
+			obj.writeObject(controllerTutor);
+			obj.close();
+		}catch (IOException e) {
+			throw new IOException("Erro ao salvar sistema");
+		}
+	}
+	
+	public void carregar() throws ClassNotFoundException{
+		try {
+			String nomeArquivo = "save.dat";
+			File arquivo = new File(nomeArquivo);
+			if (arquivo.exists()) {
+				FileInputStream f = new FileInputStream(nomeArquivo);
+				ObjectInputStream obj = new ObjectInputStream(f);
+				ControllerTutor controllerLido = (ControllerTutor) obj.readObject();
+				this.controllerTutor = controllerLido;
+				obj.close();
+			}else{
+				this.controllerTutor = new ControllerTutor();
+			}
+		}catch(IOException e) {
+			throw new ClassNotFoundException("Falha na leitura");
+		}
+	}
+	
+	public void limpar() {
+		this.controllerTutor = new ControllerTutor();
 	}
 	/**
 	 * Delegacao do metodo cadastrarAluno
@@ -97,8 +140,8 @@ public class Facade {
 	public String pegarNivel(String matriculaTutor){
 		return this.controllerTutor.pegarNivel(matriculaTutor);
 	}
-	public void doar(String matriculaTutor, int totalCentavos){
-		this.controllerTutor.doar(matriculaTutor, totalCentavos);;
+	public void doar(String matriculaTutor, int totalCentavos) throws Exception{
+		this.controllerTutor.doar(matriculaTutor, totalCentavos);
 	}
 	public int totalDinheiroTutor(String emailTutor){
 		return this.controllerTutor.totalDinheiroTutor(emailTutor);

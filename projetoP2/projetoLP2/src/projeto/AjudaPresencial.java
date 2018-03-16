@@ -1,6 +1,8 @@
 package projeto;
 
-public class AjudaPresencial extends Ajuda {
+import java.io.Serializable;
+
+public class AjudaPresencial extends Ajuda implements Serializable {
 
 	private String horario, dia, localInteresse;
 

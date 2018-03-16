@@ -1,6 +1,8 @@
 package projeto;
 
-public class AjudaOnline extends Ajuda{
+import java.io.Serializable;
+
+public class AjudaOnline extends Ajuda implements Serializable{
 
 	public AjudaOnline(int id,String matricula, String disciplina, String matriculaTutor)throws IllegalArgumentException {
 		super(id, matricula, disciplina, matriculaTutor);

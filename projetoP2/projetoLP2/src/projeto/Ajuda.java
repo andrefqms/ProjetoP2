@@ -1,6 +1,8 @@
 package projeto;
 
-public abstract class Ajuda {
+import java.io.Serializable;
+
+public abstract class Ajuda implements Serializable{
 
 	private String disciplina;
 	private String matricula;

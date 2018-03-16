@@ -1,8 +1,9 @@
 package projeto;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Tutor extends Aluno implements Comparable<Tutor>{
+public class Tutor extends Aluno implements Comparable<Tutor>, Serializable{
 	/**
 	 * Atributos
 	 */
@@ -13,7 +14,7 @@ public class Tutor extends Aluno implements Comparable<Tutor>{
 	private int dinheiro;
 	private ArrayList<String> disciplinas;
 	private double avaliacao;
-	private String Nivel;
+	private String nivel;
 
 	public Tutor(String nome, String matricula, int codigoCurso, String telefone, String email, int proficiencia)throws IllegalArgumentException {
 		super(nome, matricula, codigoCurso, telefone, email);
@@ -24,6 +25,7 @@ public class Tutor extends Aluno implements Comparable<Tutor>{
 		this.dias = new ArrayList<String>();
 		this.horarios = new ArrayList<String>();
 		this.local = "";
+		this.nivel = "";
 	}
 
 	/**
@@ -99,6 +101,8 @@ public class Tutor extends Aluno implements Comparable<Tutor>{
 	public void setAvaliacao(double avaliacao) {
 		this.avaliacao = avaliacao;
 	}
+	
+	
 	/**
 	 * representacao textual da classe
 	 */
@@ -122,7 +126,11 @@ public class Tutor extends Aluno implements Comparable<Tutor>{
 		}
 	}
 	public String getNivel() {
-		return Nivel;
+		return nivel;
+	}
+
+	public void setNivel(String nivel) {
+		this.nivel = nivel;
 	}
 
 }
