@@ -88,14 +88,6 @@ public class ControllerTutorTest implements Serializable {
 				controller.listarTutores());
 	}
 
-	/*
-	 * @Test public void testProcurarTutorEmail() {
-	 * aluno.cadastrarAluno("Daniel", "116210607", 22, "98485-5554",
-	 * "daniel.jose.leite@ccc.ufcg.edu.br"); controller.tornarTutor(aluno,
-	 * "116210607", "P2", 5);
-	 * assertEquals("116210607 - Daniel - 22 - 98485-5554 - daniel.jose.leite@ccc.ufcg.edu.br"
-	 * , controller.ProcurarTutorEmail("daniel.jose.leite@ccc.ufcg.edu.br")); }
-	 */
 	/**
 	 * metodo que testa se realmente cadsatrar o horario e testa o retorno
 	 * booleano do consulta horario
@@ -147,7 +139,9 @@ public class ControllerTutorTest implements Serializable {
 		assertEquals("Tutor - 131313, , disciplina - LP2", controller.pegarTutor(2));
 		
 	}
-	
+	/**
+	 * metodo que testa se pede ajuda presencial e é retorna o id correto
+	 */
 	@Test
 	public void testPedirAjudaPresencial() {
 		aluno.cadastrarAluno("Daniel", "116210607", 22, "98485-5554", "daniel.jose.leite@ccc.ufcg.edu.br");
@@ -156,7 +150,9 @@ public class ControllerTutorTest implements Serializable {
 		controller.cadastrarLocalDeAtendimento(controller, "daniel.jose.leite@ccc.ufcg.edu.br", "LCC3");
 		assertEquals(1, controller.pedirAjudaPresencial("111111", "P2", "12:00", "seg", "LCC3"));
 	}
-	
+	/**
+	 * metodo que testa GetInfoAjuda
+	 */
 	@Test
 	public void testGetInfoAjuda() {
 		aluno.cadastrarAluno("Daniel", "116210607", 22, "98485-5554", "daniel.jose.leite@ccc.ufcg.edu.br");
@@ -170,7 +166,9 @@ public class ControllerTutorTest implements Serializable {
 		assertEquals("seg", controller.getInfoAjuda(1, "Dia"));
 		assertEquals("LCC3", controller.getInfoAjuda(1, "LOCALiNTERESSE"));
 	}
-	
+	/**
+	 * metodo que testa AvaliarTutor
+	 */
 	@Test
 	public void testAvaliarTutor() {
 		aluno.cadastrarAluno("Daniel", "116210607", 22, "98485-5554", "daniel.jose.leite@ccc.ufcg.edu.br");
@@ -185,4 +183,16 @@ public class ControllerTutorTest implements Serializable {
 		
 	}
 
+	/**
+	 * metodo que testa se  é retorna o tutor e o pedido relacionado
+	 */
+	@Test
+	public void testPegarTutor(){
+		aluno.cadastrarAluno("Daniel", "116210607", 22, "98485-5554", "daniel.jose.leite@ccc.ufcg.edu.br");
+		controller.tornarTutor(aluno, "116210607", "P2", 5);
+		controller.cadastrarLocalDeAtendimento(controller, "daniel.jose.leite@ccc.ufcg.edu.br", "LCC3");
+		controller.cadastrarHorario(controller, "daniel.jose.leite@ccc.ufcg.edu.br", "12:00", "seg");
+		controller.pedirAjudaPresencial("116210600", "P2", "12:00", "seg", "LCC3");
+		assertEquals("Tutor - 116210607, horario - 12:00, dia - seg, local - LCC3, disciplina - P2",controller.pegarTutor(1));
+	}
 }

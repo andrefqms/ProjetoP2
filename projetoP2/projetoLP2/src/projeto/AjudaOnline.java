@@ -14,7 +14,10 @@ public class AjudaOnline extends Ajuda implements Serializable{
 		}
 		
 	}
-
+	/**
+	 * metodo que retorna a representacao textual da classe
+	 * @return
+	 */
 	@Override
 	public String toString() {
 		return ", disciplina - " + getDisciplina();

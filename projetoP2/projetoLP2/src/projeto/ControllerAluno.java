@@ -104,5 +104,19 @@ public class ControllerAluno implements Serializable {
 	public void setAlunos(ArrayList<Aluno> alunos) {
 		this.alunos = alunos;
 	}
+	/**
+	 * metodo que ordena a listagem de acordo com o criterio
+	 * @param atributo
+	 */
+		public void configurarOrdem(String atributo) {
+			if (atributo.equalsIgnoreCase("email")) {
+				Collections.sort(alunos, new AlunoComparatorEmail());	
+			} else if (atributo.equalsIgnoreCase("matricula")) {
+				Collections.sort(alunos, new AlunoComparatorMatricula());
+			} else if (atributo.equalsIgnoreCase("nome")) {
+				Collections.sort(alunos, new AlunoComparator());
+			}
+
+		}
 
 }

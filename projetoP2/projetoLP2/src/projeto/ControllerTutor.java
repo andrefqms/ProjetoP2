@@ -18,7 +18,32 @@ public class ControllerTutor implements Serializable {
 		this.pedidos = new HashMap<Integer, Ajuda>();
 		this.total = 0;
 	}
-
+	/**
+	 * configura a ordem de acordo com o atributo
+	 * @param atributo
+	 */
+	public void configurarOrdem(String atributo) {
+		ArrayList<Tutor> sortedList = new ArrayList<>();
+		sortedList.addAll(tutores);
+		if (atributo.equalsIgnoreCase("email")) {
+			Collections.sort(sortedList, new TutorComparatorEmail());
+		} else if (atributo.equalsIgnoreCase("matricula")) {
+			Collections.sort(sortedList, new TutorComparatorMatricula());
+		} else if (atributo.equalsIgnoreCase("nome")) {
+			Collections.sort(sortedList, new TutorComparatorNome());
+		}
+		tutores.clear();
+		tutores.addAll(sortedList);
+	}/**
+	 * ao pedir ajuda, procura o tutor de maior proficiencia e cria a ajuda presencial
+	 * @param matrAluno
+	 * @param disciplina
+	 * @param horario
+	 * @param dia
+	 * @param localInteresse
+	 * @return id 
+	 * @throws IllegalArgumentException
+	 */
 	public int pedirAjudaPresencial(String matrAluno, String disciplina, String horario, String dia,
 			String localInteresse) throws IllegalArgumentException {
 		String matriculaTutor = matriculaTutorPresencial(disciplina, horario, dia, localInteresse);
@@ -29,7 +54,13 @@ public class ControllerTutor implements Serializable {
 		ajuda.setMatriculaTutor(matriculaTutor);
 		return id;
 	}
-
+	/**
+	 * ao pedir ajuda, procura o tutor de maior proficiencia e cria a ajuda online
+	 * @param matrAluno
+	 * @param disciplina
+	 * @return id
+	 * @throws IllegalArgumentException
+	 */
 	public int pedirAjudaOnline(String matrAluno, String disciplina) throws IllegalArgumentException {
 		String matriculaTutor = matriculaTutorOnline(disciplina);
 		int id = this.pedidos.size() + 1;
@@ -67,7 +98,12 @@ public class ControllerTutor implements Serializable {
 
 		return matricula;
 	}
-
+	/**
+	 * é um metodo que é possível pegar informações sobre certo pedido de ajuda 
+	 * @param idAjuda
+	 * @return uma string informando sobre o tutor e o pedido correspondente
+	 * @throws IllegalArgumentException
+	 */
 	public String pegarTutor(int idAjuda) throws IllegalArgumentException {
 		if (idAjuda < 0) {
 			throw new IllegalArgumentException("Erro ao tentar recuperar tutor : id nao pode menor que zero ");
@@ -77,7 +113,13 @@ public class ControllerTutor implements Serializable {
 		}
 		return "Tutor - " + pedidos.get(idAjuda).getMatriculaTutor() + ", " + pedidos.get(idAjuda).toString();
 	}
-
+	/**
+	 * metodo que retorna uma mensagem com o atributo de certa ajuda
+	 * @param idAjuda
+	 * @param atributo
+	 * @return
+	 * @throws IllegalArgumentException
+	 */
 	public String getInfoAjuda(int idAjuda, String atributo) throws IllegalArgumentException {
 		if (idAjuda < 0) {
 			throw new IllegalArgumentException("Erro ao tentar recuperar info da ajuda : id nao pode menor que zero ");
@@ -105,7 +147,13 @@ public class ControllerTutor implements Serializable {
 		}
 		return retorno;
 	}
-
+	/**
+	 * metodo que avalia o tutor de 0 a 5
+	 * @param idAjuda
+	 * @param nota
+	 * @return
+	 * @throws IllegalArgumentException
+	 */
 	public void avaliarTutor(int idAjuda, int nota) throws IllegalArgumentException {
 		if (nota < 0) {
 			throw new IllegalArgumentException("Erro na avaliacao de tutor: nota nao pode ser menor que 0");
@@ -130,7 +178,11 @@ public class ControllerTutor implements Serializable {
 		pedidos.get(idAjuda).setAvaliado(true);
 		// return tutoresAssociados.get(idAjuda - 1).getMatricula();
 	}
-
+	/**
+	 * metodo que acessa a avaliacao que o tutor possui
+	 * @param matriculaTutor
+	 * @return  a avaliacao
+	 */
 	public String pegarNota(String matriculaTutor) {
 		String nota = "";
 		for (Tutor tutor : getTutores()) {
@@ -161,7 +213,10 @@ public class ControllerTutor implements Serializable {
 		}
 		return retorno;
 	}
-
+	/**
+	 * metodo acessor que retorna o total em quantia do sistema
+	 * @return
+	 */
 	public int getTotal() {
 		return total;
 	}
