@@ -25,7 +25,9 @@ public class Facade implements Serializable {
 		this.controllerTutor = new ControllerTutor();
 		this.controllerAluno = new ControllerAluno();
 	}
-	
+	/**
+	 *  metodo que escreve o arquivo
+	 */
 	
 	public void salvar() throws ClassNotFoundException, IOException {
 		try {
@@ -38,7 +40,9 @@ public class Facade implements Serializable {
 			throw new IOException("Erro ao salvar sistema");
 		}
 	}
-	
+	/**
+	 *  metodo que lê o arquivo
+	 */
 	public void carregar() throws ClassNotFoundException{
 		try {
 			String nomeArquivo = "save.dat";
@@ -56,7 +60,9 @@ public class Facade implements Serializable {
 			throw new ClassNotFoundException("Falha na leitura");
 		}
 	}
-	
+	/**
+	 *  metodo que limpa o arquivo
+	 */
 	public void limpar() {
 		this.controllerTutor = new ControllerTutor();
 	}
@@ -118,34 +124,54 @@ public class Facade implements Serializable {
 	 */
 	public boolean consultaLocal(String email, String local){
 		return this.controllerTutor.consultaLocal(email, local);
-	}
+	}/**
+	 * Delegacao do metodo pedirAjudaPresencial
+	 */
 	public int pedirAjudaPresencial (String matrAluno, String disciplina, String horario, String dia, String localInteresse){
 		return this.controllerTutor.pedirAjudaPresencial(matrAluno, disciplina, horario, dia, localInteresse);
-	}
+	}/**
+	 * Delegacao do metodo pedirAjudaOnline
+	 */
 	public int pedirAjudaOnline (String matrAluno, String disciplina){
 		return this.controllerTutor.pedirAjudaOnline(matrAluno, disciplina);
-	}
+	}/**
+	 * Delegacao do metodo pegarTutor
+	 */
 	public String pegarTutor(int idAjuda){
 		return this.controllerTutor.pegarTutor(idAjuda);
-	}
+	}/**
+	 * Delegacao do metodo getInfoAjuda
+	 */
 	public String getInfoAjuda(int idAjuda, String atributo){
 		return this.controllerTutor.getInfoAjuda(idAjuda, atributo);
-	}
+	}/**
+	 * Delegacao do metodo avaliarTutor
+	 */
 	public void avaliarTutor(int idAjuda, int nota) {
 		this.controllerTutor.avaliarTutor(idAjuda, nota);
-	}
+	}/**
+	 * Delegacao do metodo pegarNota
+	 */
 	public String pegarNota(String matriculaTutor) {
 		return this.controllerTutor.pegarNota(matriculaTutor);
-	}
+	}/**
+	 * Delegacao do metodo pegarNivel
+	 */
 	public String pegarNivel(String matriculaTutor){
 		return this.controllerTutor.pegarNivel(matriculaTutor);
-	}
+	}/**
+	 * Delegacao do metodo doar
+	 */
 	public void doar(String matriculaTutor, int totalCentavos) throws Exception{
 		this.controllerTutor.doar(matriculaTutor, totalCentavos);
-	}
+	}/**
+	 * Delegacao do metodo totalDinheiroTutor
+	 */
 	public int totalDinheiroTutor(String emailTutor){
 		return this.controllerTutor.totalDinheiroTutor(emailTutor);
-	}
+	}/**
+	 * Delegacao do metodo totalDinheiroSistema
+	 */
 	public int totalDinheiroSistema(){
 		return this.controllerTutor.totalDinheiroSistema();
 

@@ -53,7 +53,10 @@ public class AjudaPresencial extends Ajuda implements Serializable {
 	public void setLocalInteresse(String localInteresse) {
 		this.localInteresse = localInteresse;
 	}
-
+	/**
+	 * metodo que retorna a representacao textual da classe
+	 * @return
+	 */
 	@Override
 	public String toString() {
 		return "horario - "+horario + ", dia - " + dia + ", local - " + localInteresse + ", disciplina - " + getDisciplina();

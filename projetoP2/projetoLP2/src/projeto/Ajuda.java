@@ -19,11 +19,17 @@ public abstract class Ajuda implements Serializable{
 		this.id = 0;
 		
 	}
-
+	/**
+	 * metodo acessor da id
+	 * @return
+	 */
 	public int getId() {
 		return id;
 	}
-
+	/**
+	 * metodo modificador da id
+	 * @return
+	 */
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -35,19 +41,31 @@ public abstract class Ajuda implements Serializable{
 	public void setAvaliado(boolean avaliado) {
 		this.avaliado = avaliado;
 	}
-
+	/**
+	 * metodo acessor da disciplina
+	 * @return
+	 */
 	public String getDisciplina() {
 		return disciplina;
 	}
-
+	/**
+	 * metodo modificador da disciplina
+	 * 
+	 */
 	public void setDisciplina(String disciplina) {
 		this.disciplina = disciplina;
 	}
-
+	/**
+	 * metodo acessor da matricula
+	 * @return
+	 */
 	public String getMatricula() {
 		return matricula;
 	}
-
+	/**
+	 * metodo modificador da matricula
+	 * @return
+	 */
 	public void setMatricula(String matricula) {
 		this.matricula = matricula;
 	}
@@ -59,7 +77,10 @@ public abstract class Ajuda implements Serializable{
 	public void setMatriculaTutor(String matriculaTutor) {
 		this.matriculaTutor = matriculaTutor;
 	}
-
+	/**
+	 * metodo que retorna a representacao textual da classe
+	 * @return
+	 */
 	@Override
 	public String toString() {
 		return disciplina + " - " + matricula;
