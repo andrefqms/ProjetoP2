@@ -82,14 +82,21 @@ public class ControllerAlunoTest {
 		assertEquals("116210607 - Daniel - 22 - 98485-5554 - daniel.jose.leite@ccc.ufcg.edu.br",
 				controller.ProcurarAlunoEmail("daniel.jose.leite@ccc.ufcg.edu.br").toString());
 	}
-
+	/**
+	 * testa se a ordenação esta de acordo com o atributo dado
+	 */
 	@Test
 	public void testconfigurarOrdem() {
-		controller.cadastrarAluno("Daniel", "116210607", 22, "98485-5554", "daniel.jose.leite@ccc.ufcg.edu.br");
-		controller.cadastrarAluno("Andre Melio", "115260904", 10000, "", "matthew.met@ccc.ufcg.edu.br");
+		controller.cadastrarAluno("Daniel", "116210607", 22, "98485-5554", "a@hotmail");
+		controller.cadastrarAluno("Andre Melio", "115260904", 10000, "", "b@hotmail");
 		controller.configurarOrdem("nome");
-		assertEquals(
-				"115260904 - Andre Melio - 10000 - matthew.met@ccc.ufcg.edu.br, 116210607 - Daniel - 22 - 98485-5554 - daniel.jose.leite@ccc.ufcg.edu.br",
+		assertEquals("115260904 - Andre Melio - 10000 - b@hotmail, 116210607 - Daniel - 22 - 98485-5554 - a@hotmail",
+				controller.listarAlunos());
+		controller.configurarOrdem("matricula");
+		assertEquals("115260904 - Andre Melio - 10000 - b@hotmail, 116210607 - Daniel - 22 - 98485-5554 - a@hotmail",
+				controller.listarAlunos());
+		controller.configurarOrdem("email");
+		assertEquals("115260904 - Andre Melio - 10000 - b@hotmail, 116210607 - Daniel - 22 - 98485-5554 - a@hotmail",
 				controller.listarAlunos());
 
 	}
