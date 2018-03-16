@@ -11,6 +11,6 @@ public class AlunoComparator implements Comparator<Aluno> {
 	if( a1.getNome().compareTo(a2.getNome()) == 0){
  		return a1.getMatricula().compareTo(a2.getMatricula());
 	}
-	return a1.getEmail().compareTo(a2.getEmail());
+	return a1.getNome().compareTo(a2.getNome());
 	}
 }

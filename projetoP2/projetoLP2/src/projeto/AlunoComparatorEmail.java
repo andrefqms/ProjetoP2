@@ -4,7 +4,7 @@ import java.util.Comparator;
 
 public class AlunoComparatorEmail implements Comparator<Aluno> {
 	/**
-	 * metodo compare da interface Comparator que compara dois alunos
+	 * metodo compare da interface Comparator que compara emails de dois alunos e desempata com a matricula
 	 */
 	@Override
 	public int compare(Aluno a1, Aluno a2) {

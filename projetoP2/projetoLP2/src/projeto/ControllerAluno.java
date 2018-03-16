@@ -11,6 +11,7 @@ public class ControllerAluno {
 		this.alunos = new ArrayList<Aluno>();
 
 	}
+	
 /**
  * metodo que ordena a listagem de acordo com o criterio
  * @param atributo
@@ -19,9 +20,9 @@ public class ControllerAluno {
 		if (atributo.equalsIgnoreCase("email")) {
 			Collections.sort(alunos, new AlunoComparatorEmail());	
 		} else if (atributo.equalsIgnoreCase("matricula")) {
-			Collections.sort(alunos, new AlunoComparatorEmail());
+			Collections.sort(alunos, new AlunoComparatorMatricula());
 		} else if (atributo.equalsIgnoreCase("nome")) {
-			Collections.sort(alunos, new AlunoComparatorEmail());
+			Collections.sort(alunos, new AlunoComparator());
 		}
 
 	}

@@ -1,6 +1,5 @@
 package projeto;
 
-import java.awt.List;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -18,44 +17,68 @@ public class ControllerTutor {
 		this.pedidos = new ArrayList<>();
 		this.total = 0;
 	}
+
+	/**
+	 * configura a ordem de acordo com o atributo
+	 * @param atributo
+	 */
 	public void configurarOrdem(String atributo) {
 		ArrayList<Tutor> sortedList = new ArrayList<>();
 		sortedList.addAll(tutores);
-		Collections.sort(sortedList);
 		if (atributo.equalsIgnoreCase("email")) {
-			Collections.sort(sortedList, new TutorComparatorEmail());	
+			Collections.sort(sortedList, new TutorComparatorEmail());
 		} else if (atributo.equalsIgnoreCase("matricula")) {
-			Collections.sort(sortedList, new TutorComparatorEmail());
+			Collections.sort(sortedList, new TutorComparatorMatricula());
 		} else if (atributo.equalsIgnoreCase("nome")) {
-			Collections.sort(sortedList, new TutorComparatorEmail());
+			Collections.sort(sortedList, new TutorComparatorNome());
 		}
-		tutores.removeAll(tutores);
+		tutores.clear();
 		tutores.addAll(sortedList);
 	}
+	/**
+	 * ao pedir ajuda, procura o tutor de maior proficiencia e cria a ajuda presencial
+	 * @param matrAluno
+	 * @param disciplina
+	 * @param horario
+	 * @param dia
+	 * @param localInteresse
+	 * @return id 
+	 * @throws IllegalArgumentException
+	 */
 	public int pedirAjudaPresencial(String matrAluno, String disciplina, String horario, String dia,
 			String localInteresse) throws IllegalArgumentException {
 		AjudaPresencial ajuda = new AjudaPresencial(matrAluno, disciplina, horario, dia, localInteresse);
 		Tutor tutor = ProcurarTutorProficiencia(ProcurarTutorDisciplina(disciplina));
-		if (consultaHorario(tutor.getEmail(), horario, dia)
-				&& consultaLocal(tutor.getEmail(), localInteresse)) {
+		if (consultaHorario(tutor.getEmail(), horario, dia) && consultaLocal(tutor.getEmail(), localInteresse)) {
 			tutoresAssociados.add(tutor);
 
 		}
 		pedidos.add(ajuda);
 		return pedidos.size();
 	}
-
+	/**
+	 * ao pedir ajuda, procura o tutor de maior proficiencia e cria a ajuda online
+	 * @param matrAluno
+	 * @param disciplina
+	 * @return id
+	 * @throws IllegalArgumentException
+	 */
 	public int pedirAjudaOnline(String matrAluno, String disciplina) throws IllegalArgumentException {
 		AjudaOnline ajuda = new AjudaOnline(matrAluno, disciplina);
 		Tutor tutor = ProcurarTutorProficiencia(ProcurarTutorDisciplina(disciplina));
-		if(!tutor.equals(null) && !ajuda.equals(null)){
-				tutoresAssociados.add(tutor);
-				pedidos.add(ajuda);
+		if (!tutor.equals(null) && !ajuda.equals(null)) {
+			tutoresAssociados.add(tutor);
+			pedidos.add(ajuda);
 
 		}
 		return pedidos.size();
 	}
-
+	/**
+	 * é um metodo que é possível pegar informações sobre certo pedido de ajuda 
+	 * @param idAjuda
+	 * @return uma string informando sobre o tutor e o pedido correspondente
+	 * @throws IllegalArgumentException
+	 */
 	public String pegarTutor(int idAjuda) throws IllegalArgumentException {
 		if (idAjuda < 0) {
 			throw new IllegalArgumentException("Erro ao tentar recuperar tutor : id nao pode menor que zero ");
@@ -66,7 +89,13 @@ public class ControllerTutor {
 		return "Tutor - " + tutoresAssociados.get(idAjuda - 1).getMatricula() + ", "
 				+ pedidos.get(idAjuda - 1).toString();
 	}
-
+	/**
+	 * metodo que retorna uma mensagem com o atributo de certa ajuda
+	 * @param idAjuda
+	 * @param atributo
+	 * @return
+	 * @throws IllegalArgumentException
+	 */
 	public String getInfoAjuda(int idAjuda, String atributo) throws IllegalArgumentException {
 		if (idAjuda < 0) {
 			throw new IllegalArgumentException("Erro ao tentar recuperar info da ajuda : id nao pode menor que zero ");
@@ -91,26 +120,36 @@ public class ControllerTutor {
 
 		return retorno;
 	}
-
-	public String avaliarTutor(int idAjuda, int nota)throws IllegalArgumentException {
-		if(nota < 0){
+	/**
+	 * metodo que avalia o tutor de 0 a 5
+	 * @param idAjuda
+	 * @param nota
+	 * @return
+	 * @throws IllegalArgumentException
+	 */
+	public String avaliarTutor(int idAjuda, int nota) throws IllegalArgumentException {
+		if (nota < 0) {
 			throw new IllegalArgumentException("Erro na avaliacao de tutor: nota nao pode ser menor que 0");
-		}if(nota > 5.0){
+		}
+		if (nota > 5.0) {
 			throw new IllegalArgumentException("Erro na avaliacao de tutor: nota nao pode ser maior que 5");
-		}if(tutoresAssociados.size() < idAjuda){
+		}
+		if (tutoresAssociados.size() < idAjuda) {
 			throw new IllegalArgumentException("Erro na avaliacao de tutor: id nao encontrado ");
 		}
-		if(tutoresAssociados.get(idAjuda-1).getAvaliacao() != 0){
+		if (tutoresAssociados.get(idAjuda - 1).getAvaliacao() != 0) {
 			throw new IllegalArgumentException("Erro na avaliacao de tutor: Ajuda ja avaliada");
 		}
-		
-		
-		
-		tutoresAssociados.get(idAjuda - 1).setAvaliacao((tutoresAssociados.get(idAjuda - 1).getAvaliacao()*5 + nota)/6);
+
+		tutoresAssociados.get(idAjuda - 1)
+				.setAvaliacao((tutoresAssociados.get(idAjuda - 1).getAvaliacao() * 5 + nota) / 6);
 		return tutoresAssociados.get(idAjuda - 1).getMatricula();
 	}
-	
-	
+	/**
+	 * metodo que acessa a avaliacao que o tutor possui
+	 * @param matriculaTutor
+	 * @return  a avaliacao
+	 */
 	public String pegarNota(String matriculaTutor) {
 		String nota = "";
 		for (Tutor tutor : getTutores()) {
@@ -118,10 +157,14 @@ public class ControllerTutor {
 				nota = String.format("%.2f", tutor.getAvaliacao());
 			}
 		}
-		
+
 		return nota;
 	}
-	
+	/**
+	 * metodo que retorna qual é o nivel do tutor (TOP,Tutor ou Aprendiz)
+	 * @param matriculaTutor
+	 * @return
+	 */
 	public String pegarNivel(String matriculaTutor) {
 		for (Tutor tutor : getTutores()) {
 			if (tutor.getMatricula().equals(matriculaTutor)) {
@@ -130,61 +173,97 @@ public class ControllerTutor {
 		}
 		return "";
 	}
-	
-	
+	/**
+	 * metodo acessor que retorna o total em quantia do sistema
+	 * @return
+	 */
 	public int getTotal() {
 		return total;
 	}
+	/**
+	 * metodo recursivo que calcula o dinheiro no caso do nivel ser TOP
+	 * @param matriculaTutor
+	 * @param totalCentavos
+	 * @param nota
+	 * @param nivel_porcento
+	 * @return
+	 */
+	public double calculoDinheiro(String matriculaTutor, int totalCentavos, double nota, double nivel_porcento) {
+		double total;
+		if (ProcurarTutor(matriculaTutor).getAvaliacao() == nota) {
+			return total = (1 - nivel_porcento) * totalCentavos;
+		} else {
+			return calculoDinheiro(matriculaTutor, totalCentavos, nota + 0.1, nivel_porcento + 0.01);
+		}
 
-	public double calculoDinheiro(String matriculaTutor, int totalCentavos,double nota, double nivel_porcento){
-		double total;
-		if(ProcurarTutor(matriculaTutor).getAvaliacao() == nota){
-			return total  = (1 - nivel_porcento) * totalCentavos ;
-		}else{
-			return calculoDinheiro( matriculaTutor, totalCentavos,nota + 0.1,nivel_porcento + 0.01);
-		}
-		
 	}
-	public double calculoDinheiro2(String matriculaTutor, int totalCentavos,double nota, double nivel_porcento){
+	/**
+	 * Metodo recursivo que calcula a quantia no caso do nivel ser Aprendiz
+	 * @param matriculaTutor
+	 * @param totalCentavos
+	 * @param nota
+	 * @param nivel_porcento
+	 * @return
+	 */
+	public double calculoDinheiro2(String matriculaTutor, int totalCentavos, double nota, double nivel_porcento) {
 		double total;
-		if(ProcurarTutor(matriculaTutor).getAvaliacao() == nota){
-			return total  = (1 - nivel_porcento) * totalCentavos ;
-		}else{
-			return calculoDinheiro( matriculaTutor, totalCentavos,nota - 0.1,nivel_porcento - 0.01);
+		if (ProcurarTutor(matriculaTutor).getAvaliacao() == nota) {
+			return total = (1 - nivel_porcento) * totalCentavos;
+		} else {
+			return calculoDinheiro(matriculaTutor, totalCentavos, nota - 0.1, nivel_porcento - 0.01);
 		}
-		
+
 	}
-	public void doar(String matriculaTutor, int totalCentavos)throws IllegalArgumentException{
-		if(ProcurarTutor(matriculaTutor) == null){
+	/**
+	 * metodo que doa certa quantia para o tutor e separa uma parte para o sistema
+	 * @param matriculaTutor
+	 * @param totalCentavos
+	 * @throws IllegalArgumentException
+	 */
+	public void doar(String matriculaTutor, int totalCentavos) throws IllegalArgumentException {
+		if (ProcurarTutor(matriculaTutor) == null) {
 			throw new IllegalArgumentException("Erro na doacao para tutor: Tutor nao encontrado");
 		}
-		if(totalCentavos < 0){
+		if (totalCentavos < 0) {
 			throw new IllegalArgumentException("Erro na doacao para tutor: totalCentavos nao pode ser menor que zero");
 		}
-		if(ProcurarTutor(matriculaTutor).getAvaliacao() >= 4.5){
+		if (ProcurarTutor(matriculaTutor).getAvaliacao() >= 4.5) {
 			total += calculoDinheiro(matriculaTutor, totalCentavos, 4.5, 0.9);
 			ProcurarTutor(matriculaTutor).setDinheiro(totalCentavos - total);
-		}else if(ProcurarTutor(matriculaTutor).getAvaliacao() > 3.0 && ProcurarTutor(matriculaTutor).getAvaliacao() < 4.5){
-			total += (1 - 0.8) * totalCentavos ;
+		} else if (ProcurarTutor(matriculaTutor).getAvaliacao() > 3.0
+				&& ProcurarTutor(matriculaTutor).getAvaliacao() < 4.5) {
+			total += (1 - 0.8) * totalCentavos;
 			ProcurarTutor(matriculaTutor).setDinheiro(totalCentavos - total);
-		}else{
-			total +=  calculoDinheiro2(matriculaTutor, totalCentavos, 3.0, 0.3);
+		} else {
+			total += calculoDinheiro2(matriculaTutor, totalCentavos, 3.0, 0.3);
 			ProcurarTutor(matriculaTutor).setDinheiro(totalCentavos - total);
 		}
-		
+
 	}
-	public int totalDinheiroTutor(String emailTutor)throws IllegalArgumentException{
-		if(emailTutor.trim().equals("") || emailTutor.equals(null)){
-			throw new IllegalArgumentException("Erro na consulta de total de dinheiro do tutor: emailTutor nao pode ser vazio ou nulo");
-		}if(ProcurarTutorEmail(emailTutor) == null){
+	/**
+	 * metodo que retorna o total de dinheiro de certo tutor
+	 * @param emailTutor
+	 * @return
+	 * @throws IllegalArgumentException
+	 */
+	public int totalDinheiroTutor(String emailTutor) throws IllegalArgumentException {
+		if (emailTutor.trim().equals("") || emailTutor.equals(null)) {
+			throw new IllegalArgumentException(
+					"Erro na consulta de total de dinheiro do tutor: emailTutor nao pode ser vazio ou nulo");
+		}
+		if (ProcurarTutorEmail(emailTutor) == null) {
 			throw new IllegalArgumentException("Erro na consulta de total de dinheiro do tutor: Tutor nao encontrado");
 		}
 		return (int) ProcurarTutorEmail(emailTutor).getDinheiro();
 	}
-	public int totalDinheiroSistema(){
+	/**
+	 * metodo que chama o getTotal, que retorna o total em quantia do sistema
+	 * @return
+	 */
+	public int totalDinheiroSistema() {
 		return getTotal();
 	}
-	
+
 	/**
 	 * Metodo que procura certo tutor e retorna ele
 	 */
@@ -332,7 +411,8 @@ public class ControllerTutor {
 	}
 
 	/**
-	 * metodo que retorna true se possui certo horario de atendimento e false se nao
+	 * metodo que retorna true se possui certo horario de atendimento e false se
+	 * nao
 	 */
 	public boolean consultaHorario(String email, String horario, String dia) {
 		for (Tutor tutor : tutores) {
@@ -348,7 +428,8 @@ public class ControllerTutor {
 	}
 
 	/**
-	 * metodo que retorna true se possui certo local de atendimento e false se nao
+	 * metodo que retorna true se possui certo local de atendimento e false se
+	 * nao
 	 */
 	public boolean consultaLocal(String email, String local) {
 		for (Tutor tutor : tutores) {
@@ -377,5 +458,5 @@ public class ControllerTutor {
 		Collections.sort(lista);
 		return lista.get(0);
 	}
-	
+
 }

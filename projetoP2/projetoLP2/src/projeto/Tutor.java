@@ -119,7 +119,13 @@ public class Tutor extends Aluno implements Comparable<Tutor>{
 		}
 	}
 	public String getNivel() {
-		return Nivel;
+		if(this.avaliacao > 4.5){
+			return "TOP";
+		}else if(this.avaliacao > 3 && this.avaliacao <= 4.5){
+			return "Tutor";
+		}else{
+			return "Aprendiz";
+		}
 	}
 
 }

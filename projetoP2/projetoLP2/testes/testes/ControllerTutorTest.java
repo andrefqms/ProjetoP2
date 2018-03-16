@@ -87,14 +87,6 @@ public class ControllerTutorTest {
 				controller.listarTutores());
 	}
 
-	/*
-	 * @Test public void testProcurarTutorEmail() {
-	 * aluno.cadastrarAluno("Daniel", "116210607", 22, "98485-5554",
-	 * "daniel.jose.leite@ccc.ufcg.edu.br"); controller.tornarTutor(aluno,
-	 * "116210607", "P2", 5);
-	 * assertEquals("116210607 - Daniel - 22 - 98485-5554 - daniel.jose.leite@ccc.ufcg.edu.br"
-	 * , controller.ProcurarTutorEmail("daniel.jose.leite@ccc.ufcg.edu.br")); }
-	 */
 	/**
 	 * metodo que testa se realmente cadsatrar o horario e testa o retorno
 	 * booleano do consulta horario
@@ -109,7 +101,7 @@ public class ControllerTutorTest {
 	}
 
 	/**
-	 * metodo que testa se realmente cadsatrar o local e testa o retorno
+	 * metodo que testa se realmente cadastrar o local e testa o retorno
 	 * booleano do consulta local
 	 */
 	@Test
@@ -120,27 +112,59 @@ public class ControllerTutorTest {
 		assertEquals(true, controller.consultaLocal("daniel.jose.leite@ccc.ufcg.edu.br", "LCC3"));
 
 	}
+
+	/**
+	 * metodo que testa se pede ajuda online e é retorna o id correto
+	 */
 	@Test
-	public void testPedirAjudaOnline(){
+	public void testPedirAjudaOnline() {
 		aluno.cadastrarAluno("José", "9999999", 22, "9696-9898", "jose.email@bol.com.br");
 		controller.tornarTutor(aluno, "9999999", "P2", 4);
 		aluno.cadastrarAluno("Daniel", "116210607", 22, "98485-5554", "daniel.jose.leite@ccc.ufcg.edu.br");
 		controller.tornarTutor(aluno, "116210607", "P2", 5);
 		controller.cadastrarLocalDeAtendimento(controller, "daniel.jose.leite@ccc.ufcg.edu.br", "LCC3");
 		controller.cadastrarHorario(controller, "daniel.jose.leite@ccc.ufcg.edu.br", "12:00", "seg");
-		controller.pedirAjudaPresencial("116210600", "P2","12:00", "seg", "LCC3");
-		assertEquals(2,controller.pedirAjudaOnline("116210600","P2"));
+		controller.pedirAjudaPresencial("116210600", "P2", "12:00", "seg", "LCC3");
+		assertEquals(2, controller.pedirAjudaOnline("116210600", "P2"));
 	}
+
+	/**
+	 * metodo que testa se pede ajuda presencial e é retorna o id correto
+	 */
 	@Test
-	public void testPedirAjudaPresencial(){
+	public void testPedirAjudaPresencial() {
 		aluno.cadastrarAluno("José", "9999999", 22, "9696-9898", "jose.email@bol.com.br");
 		controller.tornarTutor(aluno, "9999999", "P2", 4);
 		aluno.cadastrarAluno("Daniel", "116210607", 22, "98485-5554", "daniel.jose.leite@ccc.ufcg.edu.br");
 		controller.tornarTutor(aluno, "116210607", "P2", 5);
 		controller.cadastrarLocalDeAtendimento(controller, "daniel.jose.leite@ccc.ufcg.edu.br", "LCC3");
 		controller.cadastrarHorario(controller, "daniel.jose.leite@ccc.ufcg.edu.br", "12:00", "seg");
-		controller.pedirAjudaPresencial("116210600", "P2","12:00", "seg", "LCC3");
-		assertEquals(2,controller.pedirAjudaPresencial("116210600","P2","12:00","seg","LCC3"));
+		controller.pedirAjudaPresencial("116210600", "P2", "12:00", "seg", "LCC3");
+		assertEquals(2, controller.pedirAjudaPresencial("116210600", "P2", "12:00", "seg", "LCC3"));
 	}
-	
+/*
+	@Test
+	public void testconfigurarOrdem() {
+		aluno.cadastrarAluno("José", "9999999", 22, "9696-9898", "jose.email@bol.com.br");
+		controller.tornarTutor(aluno, "9999999", "P2", 4);
+		aluno.cadastrarAluno("Daniel", "116210607", 22, "98485-5554", "daniel.jose.leite@ccc.ufcg.edu.br");
+		controller.tornarTutor(aluno, "116210607", "P2", 5);
+		controller.configurarOrdem("nome");
+		assertEquals(
+				"116210607 - Daniel - 22 - 98485-5554 - daniel.jose.leite@ccc.ufcg.edu.br, 9999999 - José - 22 - 9696-9898 - jose.email@bol.com.br",
+				controller.listarTutores());
+	}
+*/
+	/**
+	 * metodo que testa se  é retorna o tutor e o pedido relacionado
+	 */
+	@Test
+	public void testPegarTutor(){
+		aluno.cadastrarAluno("Daniel", "116210607", 22, "98485-5554", "daniel.jose.leite@ccc.ufcg.edu.br");
+		controller.tornarTutor(aluno, "116210607", "P2", 5);
+		controller.cadastrarLocalDeAtendimento(controller, "daniel.jose.leite@ccc.ufcg.edu.br", "LCC3");
+		controller.cadastrarHorario(controller, "daniel.jose.leite@ccc.ufcg.edu.br", "12:00", "seg");
+		controller.pedirAjudaPresencial("116210600", "P2", "12:00", "seg", "LCC3");
+		assertEquals("Tutor - 116210607, horario - 12:00, dia - seg, local - LCC3, disciplina - P2",controller.pegarTutor(1));
+	}
 }
